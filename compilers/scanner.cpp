@@ -1,6 +1,6 @@
-#line 2 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.cpp"
+#line 2 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.cpp"
 
-#line 4 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.cpp"
+#line 4 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -439,11 +439,11 @@ static const flex_int16_t yy_chk[124] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-#line 1 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
-#line 2 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 1 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
+#line 2 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 #include "Enums.h"
-#line 446 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.cpp"
-#line 447 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.cpp"
+#line 446 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.cpp"
+#line 447 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.cpp"
 
 #define INITIAL 0
 
@@ -575,15 +575,15 @@ YY_DECL
 		}
 
 	{
-#line 9 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 9 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 
 
 
 
-#line 14 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 14 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
     /* palabras reservadas */
 
-#line 587 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.cpp"
+#line 587 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -642,28 +642,31 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 16 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 16 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::RESERV_WORD;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 18 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 18 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::IDENTIFICADOR;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 19 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 19 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::NUMERO;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 20 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 20 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::NUMERO; 
 	YY_BREAK
+
+    /* obviar comentarios */
+
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 22 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 25 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 ;
 	YY_BREAK
 
@@ -671,111 +674,111 @@ YY_RULE_SETUP
 
 case 6:
 YY_RULE_SETUP
-#line 28 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 30 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::SUM_OP;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 29 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 31 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::MINUS_OP;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 30 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 32 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::MUL_OP;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 31 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 33 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::DIV_OP;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 32 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 34 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::RELOP;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 33 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 35 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::RELOP;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 34 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 36 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::RELOP;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 35 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 37 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::RELOP;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 36 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 38 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::ASSIGN;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 37 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 39 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::RELOP;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 38 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 40 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::RELOP;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 39 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 41 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::COLON;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 40 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 42 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::PAR_BEGIN;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 41 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 43 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::PAR_END;
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 42 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 44 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::SQR_BRACKET_BEGIN;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 43 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 45 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::SQR_BRACKET_END;
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 44 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 46 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::CUR_BRACKET_BEGIN;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 45 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 47 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::CUR_BRACKET_END;
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 48 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 50 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 return Categoria::ERROR;
 	YY_BREAK
 case 25:
 /* rule 25 can match eol */
 YY_RULE_SETUP
-#line 49 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 51 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 50 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
+#line 52 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 ECHO;
 	YY_BREAK
-#line 779 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.cpp"
+#line 782 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1738,6 +1741,5 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 50 "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/compilers/scanner.l"
-
+#line 52 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
 
