@@ -1,3 +1,0 @@
-/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/build/googletest-download/CMakeFiles/rebuild_cache.dir
-/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/build/googletest-download/CMakeFiles/edit_cache.dir
-/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/build/googletest-download/CMakeFiles/googletest-download.dir
