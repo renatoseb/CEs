@@ -1,0 +1,62 @@
+Start testing: Sep 29 20:48 -05
+----------------------------------------------------------
+1/1 Testing: validation_test
+1/1 Test: validation_test
+Command: "/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/build/tests/validation_test"
+Directory: /home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/build/tests
+"validation_test" start time: Sep 29 20:48 -05
+Output:
+----------------------------------------------------------
+[==========] Running 3 tests from 3 test suites.
+[----------] Global test environment set-up.
+[----------] 1 test from SimpleTest
+[ RUN      ] SimpleTest.basicTest
+/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/tests/validation_test.cpp:24: Failure
+Expected equality of these values:
+  tokens
+    Which is: { <Identificador, a>, <Assign, =>, <Numero, -2.7> }
+  expected
+    Which is: { <Identificador, a>, <Assign, =>, <Numero, -2.7E4> }
+[  FAILED  ] SimpleTest.basicTest (0 ms)
+[----------] 1 test from SimpleTest (0 ms total)
+
+[----------] 1 test from CommentTest
+[ RUN      ] CommentTest.hasComments
+/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/tests/validation_test.cpp:45: Failure
+Expected equality of these values:
+  tokens
+    Which is: { <Identificador, a>, <Assign, =>, <Identificador, b>, <Identificador, shouldn>, <Identificador, t>, <Identificador, be>, <Identificador, printed>, <Identificador, c>, <Assign, =>, <Identificador, d> }
+  expected
+    Which is: { <Identificador, a>, <Assign, =>, <Identificador, b>, <Identificador, c>, <Assign, =>, <Identificador, d> }
+[  FAILED  ] CommentTest.hasComments (0 ms)
+[----------] 1 test from CommentTest (0 ms total)
+
+[----------] 1 test from ErrorTest
+[ RUN      ] ErrorTest.basicTest
+/home/rrodriguez/2021-2/compiladores/clases/semana-4/cs3402-lab1/tests/validation_test.cpp:65: Failure
+Expected equality of these values:
+  tokens
+    Which is: { <Identificador, a>, <Assign, =>, <Identificador, b> }
+  expected
+    Which is: { <Identificador, a>, <Assign, =>, <Identificador, b>, <Error, @> }
+[  FAILED  ] ErrorTest.basicTest (0 ms)
+[----------] 1 test from ErrorTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 3 tests from 3 test suites ran. (0 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 3 tests, listed below:
+[  FAILED  ] SimpleTest.basicTest
+[  FAILED  ] CommentTest.hasComments
+[  FAILED  ] ErrorTest.basicTest
+
+ 3 FAILED TESTS
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Failed.
+"validation_test" end time: Sep 29 20:48 -05
+"validation_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 29 20:48 -05
