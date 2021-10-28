@@ -358,6 +358,31 @@ TEST(ifelse, basicTest) {
 }
 
 
+TEST(lexicographicError, basicTest) {
+  std::istrstream str("entero numero = +20; entero numro = -20;");
+
+  FlexScanner scanner(str, std::cout);
+  std::vector<Token> tokens;
+
+  while (1) {
+    auto token = scanner.get_token();
+    if (token._atributo == END) break;
+    tokens.push_back(token);
+  }
+
+  std::vector<Token> expected = {
+                                 Token("entero", Categoria::RESERV_WORD),
+                                 Token("numero", Categoria::IDENTIFICADOR),
+                                 Token("=", Categoria::ASSIGN),
+                                 Token("+20", Categoria::NUMERO),
+                                 Token("entero", Categoria::RESERV_WORD),
+                                 Token("numro", Categoria::IDENTIFICADOR),
+                                 Token("=", Categoria::ASSIGN),
+                                 Token("-20", Categoria::NUMERO)
+                                 };
+  EXPECT_EQ(tokens, expected);
+}
+
 int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();

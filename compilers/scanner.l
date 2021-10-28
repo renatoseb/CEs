@@ -15,7 +15,7 @@ LETRA   [a-z]
 entero|retorno|sin_tipo|mientras|si|sino|main return Categoria::RESERV_WORD;
 
 {LETRA}+  return Categoria::IDENTIFICADOR;
-{DIGITO}+ return Categoria::NUMERO;
+[+-]?{DIGITO}+ return Categoria::NUMERO;
 [+-]?{DIGITO}+\.{DIGITO}[eE]?{DIGITO}?* return Categoria::NUMERO; 
 
 %{
