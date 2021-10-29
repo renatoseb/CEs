@@ -34,50 +34,50 @@ std::ostream& operator<<(std::ostream& os, Token token) {
     case Categoria::NUMERO:
       os << "Numero";
       break;
-    case Categoria::RELOP:
-      os << "RelOp";
+    case Categoria::OP_COMP:
+      os << "OpComp";
       break;
-    case Categoria::ASSIGN:
-      os << "Assign";
+    case Categoria::ASIGNAR:
+      os << "Asignar";
       break;
     case Categoria::ERROR:
       os << "Error";
       break;
-    case Categoria::SUM_OP:
-      os << "SumOp";
+    case Categoria::OP_SUMA:
+      os << "OpSuma";
       break;
-    case Categoria::MINUS_OP:
-      os << "MinOp";
+    case Categoria::OP_RESTA:
+      os << "OpResta";
       break;
-    case Categoria::MUL_OP:
-      os << "MulOp";
+    case Categoria::OP_MUL:
+      os << "OpMul";
       break;
-    case Categoria::DIV_OP:
-      os << "DivOp";
+    case Categoria::OP_DIV:
+      os << "OpDiv";
       break;
-    case Categoria::COLON:
-      os << "Colon";
+    case Categoria:COMA:
+      os << "Coma";
       break;
-    case Categoria::PAR_BEGIN:
-      os << "ParBegin";
+    case Categoria::PAR_INICIO:
+      os << "ParInicio";
       break;
-    case Categoria::PAR_END:
-      os << "ParEnd";
+    case Categoria::PAR_FINAL:
+      os << "ParFinal";
       break;
-    case Categoria::SQR_BRACKET_BEGIN:
-      os << "SqrBrcktBegin";
+    case Categoria::CORCH_INICIO:
+      os << "CorchInicio";
       break;
-    case Categoria::SQR_BRACKET_END:
-      os << "SqrBrcktEnd";
+    case Categoria::CORCH_FINAL:
+      os << "CorchFinal";
       break;
-    case Categoria::CUR_BRACKET_BEGIN:
-      os << "CurBrcktBegin";
+    case Categoria::LLAVES_INICIO:
+      os << "LLavesInicio";
       break;
-    case Categoria::CUR_BRACKET_END:
-      os << "CurBrcktEnd";
+    case Categoria::LAVES_FINAL:
+      os << "LLavesFinal";
       break;
-    case Categoria::RESERV_WORD:
-      os << "ReservWord";
+    case Categoria::PALABRA_RESERVADA:
+      os << "PalabraReservada";
       break;
 
     default:

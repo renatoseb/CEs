@@ -26,24 +26,19 @@ entero|retorno|sin_tipo|mientras|si|sino|main return Categoria::RESERV_WORD;
 %{
     /* simbolos especiales */
 %}
-"+" return Categoria::SUM_OP;
-"-" return Categoria::MINUS_OP;
-"*" return Categoria::MUL_OP;
-"/" return Categoria::DIV_OP;
-"<" return Categoria::RELOP;
-"<=" return Categoria::RELOP;
-">=" return Categoria::RELOP;
-">" return Categoria::RELOP;
-"=" return Categoria::ASSIGN;
-"==" return Categoria::RELOP;
-"!=" return Categoria::RELOP;
-"," return Categoria::COLON;
-"(" return Categoria::PAR_BEGIN;
-")" return Categoria::PAR_END;
-"[" return Categoria::SQR_BRACKET_BEGIN;
-"]" return Categoria::SQR_BRACKET_END;
-"{" return Categoria::CUR_BRACKET_BEGIN;
-"}" return Categoria::CUR_BRACKET_END;
+"+" return Categoria::OP_SUMA;
+"-" return Categoria::OP_RESTA;
+"*" return Categoria::OP_MUL;
+"/" return Categoria::OP_DIV;
+"=" return Categoria::ASIGNAR;
+"==" | "!=" | ">" | "<" | ">=" | "<=" return Categoria::OP_COMP;
+"," return Categoria::COMA;
+"(" return Categoria::PAR_INICIO;
+")" return Categoria::PAR_FINAL;
+"[" return Categoria::CORCH_INICIO;
+"]" return Categoria::CORCH_FINAL;
+"{" return Categoria::LLAVES_INICIO;
+"}" return Categoria::LLAVES_FINAL;
 
 
 [^({LETRAS}+|" "|";"|"\n"|"&&")+] return Categoria::ERROR;
