@@ -55,7 +55,7 @@ std::ostream& operator<<(std::ostream& os, Token token) {
     case Categoria::OP_DIV:
       os << "OpDiv";
       break;
-    case Categoria:COMA:
+    case Categoria::COMA:
       os << "Coma";
       break;
     case Categoria::PAR_INICIO:
@@ -73,7 +73,7 @@ std::ostream& operator<<(std::ostream& os, Token token) {
     case Categoria::LLAVES_INICIO:
       os << "LLavesInicio";
       break;
-    case Categoria::LAVES_FINAL:
+    case Categoria::LLAVES_FINAL:
       os << "LLavesFinal";
       break;
     case Categoria::PALABRA_RESERVADA:

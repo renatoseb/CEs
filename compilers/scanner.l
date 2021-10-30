@@ -5,14 +5,14 @@
 %option noyywrap c++
 
 DIGITO  [0-9]
-LETRA   [a-z]
+LETRA   [a-z]|[A-Z]
 %%
 
 
 %{
     /* palabras reservadas */
 %}
-entero|retorno|sin_tipo|mientras|si|sino|main return Categoria::RESERV_WORD;
+entero|retorno|sin_tipo|mientras|si|sino|main return Categoria::PALABRA_RESERVADA;
 
 {LETRA}+  return Categoria::IDENTIFICADOR;
 [+-]?{DIGITO}+ return Categoria::NUMERO;

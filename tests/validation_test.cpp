@@ -19,7 +19,7 @@ TEST(SimpleTest, basicTest) {
   }
 
   std::vector<Token> expected = {Token("a", Categoria::IDENTIFICADOR),
-                                 Token("=", Categoria::ASSIGN),
+                                 Token("=", Categoria::ASIGNAR),
                                  Token("-2.7E4", Categoria::NUMERO)};
   EXPECT_EQ(tokens, expected);
 }
@@ -37,10 +37,10 @@ TEST(CommentTest, hasComments) {
   }
 
   std::vector<Token> expected = {Token("a", Categoria::IDENTIFICADOR),
-                                 Token("=", Categoria::ASSIGN),
+                                 Token("=", Categoria::ASIGNAR),
                                  Token("b", Categoria::IDENTIFICADOR),
                                  Token("c", Categoria::IDENTIFICADOR),
-                                 Token("=", Categoria::ASSIGN),
+                                 Token("=", Categoria::ASIGNAR),
                                  Token("d", Categoria::IDENTIFICADOR)};
   EXPECT_EQ(tokens, expected);
 }
@@ -58,7 +58,7 @@ TEST(ErrorTest, basicTest) {
   }
 
   std::vector<Token> expected = {Token("a", Categoria::IDENTIFICADOR),
-                                 Token("=", Categoria::ASSIGN),
+                                 Token("=", Categoria::ASIGNAR),
                                  Token("b", Categoria::IDENTIFICADOR),
                                  Token("@", Categoria::ERROR),
                                  };
@@ -77,16 +77,16 @@ TEST(MainTest, basicTest) {
     tokens.push_back(token);
   }
 
-  std::vector<Token> expected = {Token("entero", Categoria::RESERV_WORD),
-                                 Token("main", Categoria::RESERV_WORD),
-                                 Token("(", Categoria::PAR_BEGIN),
-                                 Token(")", Categoria::PAR_END),
-                                 Token("{", Categoria::CUR_BRACKET_BEGIN),
-                                 Token("entero", Categoria::RESERV_WORD),
+  std::vector<Token> expected = {Token("entero", Categoria::PALABRA_RESERVADA),
+                                 Token("main", Categoria::PALABRA_RESERVADA),
+                                 Token("(", Categoria::PAR_INICIO),
+                                 Token(")", Categoria::PAR_FINAL),
+                                 Token("{", Categoria::LLAVES_INICIO),
+                                 Token("entero", Categoria::PALABRA_RESERVADA),
                                  Token("a", Categoria::IDENTIFICADOR),
-                                 Token("=", Categoria::ASSIGN),
+                                 Token("=", Categoria::ASIGNAR),
                                  Token("b", Categoria::IDENTIFICADOR),
-                                 Token("}", Categoria::CUR_BRACKET_END)
+                                 Token("}", Categoria::LLAVES_FINAL)
                                  };
   EXPECT_EQ(tokens, expected);
 }
@@ -105,10 +105,10 @@ TEST(boolExp, basicTest) {
 
   std::vector<Token> expected = {
                                  Token("a", Categoria::IDENTIFICADOR),
-                                 Token("==", Categoria::RELOP),
+                                 Token("==", Categoria::OP_COMP),
                                  Token("b", Categoria::IDENTIFICADOR),
                                  Token("a", Categoria::IDENTIFICADOR),
-                                 Token("!=", Categoria::RELOP),
+                                 Token("!=", Categoria::OP_COMP),
                                  Token("c", Categoria::IDENTIFICADOR)
                                  };
   EXPECT_EQ(tokens, expected);
@@ -126,16 +126,16 @@ TEST(OpTest, basicTest) {
     tokens.push_back(token);
   }
 
-  std::vector<Token> expected = {Token("entero", Categoria::RESERV_WORD),
+  std::vector<Token> expected = {Token("entero", Categoria::PALABRA_RESERVADA),
                                  Token("a", Categoria::IDENTIFICADOR),
-                                 Token("=", Categoria::ASSIGN),
+                                 Token("=", Categoria::ASIGNAR),
                                  Token("5", Categoria::NUMERO),
-                                 Token("+", Categoria::SUM_OP),
-                                 Token("(", Categoria::PAR_BEGIN),
+                                 Token("+", Categoria::OP_SUMA),
+                                 Token("(", Categoria::PAR_INICIO),
                                  Token("3", Categoria::NUMERO),
-                                 Token("*", Categoria::MUL_OP),
+                                 Token("*", Categoria::OP_MUL),
                                  Token("2", Categoria::NUMERO),
-                                 Token(")", Categoria::PAR_END)
+                                 Token(")", Categoria::PAR_FINAL)
                                  };
   EXPECT_EQ(tokens, expected);
 }
@@ -152,16 +152,16 @@ TEST(OpTest1, basicTest) {
     tokens.push_back(token);
   }
 
-  std::vector<Token> expected = {Token("entero", Categoria::RESERV_WORD),
+  std::vector<Token> expected = {Token("entero", Categoria::PALABRA_RESERVADA),
                                  Token("a", Categoria::IDENTIFICADOR),
-                                 Token("=", Categoria::ASSIGN),
+                                 Token("=", Categoria::ASIGNAR),
                                  Token("5", Categoria::NUMERO),
-                                 Token("/", Categoria::DIV_OP),
-                                 Token("(", Categoria::PAR_BEGIN),
+                                 Token("/", Categoria::OP_DIV),
+                                 Token("(", Categoria::PAR_INICIO),
                                  Token("3", Categoria::NUMERO),
-                                 Token("/", Categoria::DIV_OP),
+                                 Token("/", Categoria::OP_DIV),
                                  Token("2", Categoria::NUMERO),
-                                 Token(")", Categoria::PAR_END)
+                                 Token(")", Categoria::PAR_FINAL)
                                  };
   EXPECT_EQ(tokens, expected);
 }
@@ -178,22 +178,22 @@ TEST(OpTestwComents, basicTest) {
     tokens.push_back(token);
   }
 
-  std::vector<Token> expected = {Token("entero", Categoria::RESERV_WORD),
+  std::vector<Token> expected = {Token("entero", Categoria::PALABRA_RESERVADA),
                                  Token("a", Categoria::IDENTIFICADOR),
-                                 Token("=", Categoria::ASSIGN),
+                                 Token("=", Categoria::ASIGNAR),
                                  Token("5", Categoria::NUMERO),
-                                 Token("/", Categoria::DIV_OP),
-                                 Token("(", Categoria::PAR_BEGIN),
+                                 Token("/", Categoria::OP_DIV),
+                                 Token("(", Categoria::PAR_INICIO),
                                  Token("3", Categoria::NUMERO),
-                                 Token("/", Categoria::DIV_OP),
+                                 Token("/", Categoria::OP_DIV),
                                  Token("2", Categoria::NUMERO),
-                                 Token(")", Categoria::PAR_END),
+                                 Token(")", Categoria::PAR_FINAL),
 
-                                 Token("entero", Categoria::RESERV_WORD),
+                                 Token("entero", Categoria::PALABRA_RESERVADA),
                                  Token("b", Categoria::IDENTIFICADOR),
-                                 Token("=", Categoria::ASSIGN),
+                                 Token("=", Categoria::ASIGNAR),
                                  Token("20", Categoria::NUMERO),
-                                 Token("/", Categoria::DIV_OP),
+                                 Token("/", Categoria::OP_DIV),
                                  Token("30", Categoria::NUMERO)
                                  };
   EXPECT_EQ(tokens, expected);
@@ -213,16 +213,16 @@ TEST(boolExp1, basicTest) {
 
   std::vector<Token> expected = {
                                  Token("a", Categoria::IDENTIFICADOR),
-                                 Token("==", Categoria::RELOP),
+                                 Token("==", Categoria::OP_COMP),
                                  Token("b", Categoria::IDENTIFICADOR),
                                  Token("d", Categoria::IDENTIFICADOR),
-                                 Token("<", Categoria::RELOP),
+                                 Token("<", Categoria::OP_COMP),
                                  Token("e", Categoria::IDENTIFICADOR),
-                                 Token("(", Categoria::PAR_BEGIN),
+                                 Token("(", Categoria::PAR_INICIO),
                                  Token("d", Categoria::IDENTIFICADOR),
-                                 Token(">=", Categoria::RELOP),
+                                 Token(">=", Categoria::OP_COMP),
                                  Token("f", Categoria::IDENTIFICADOR),
-                                 Token(")", Categoria::PAR_END)
+                                 Token(")", Categoria::PAR_FINAL)
                                  };
   EXPECT_EQ(tokens, expected);
 }
@@ -240,24 +240,24 @@ TEST(boolExp2, basicTest) {
   }
 
   std::vector<Token> expected = {
-                                 Token("si", Categoria::RESERV_WORD),
-                                 Token("(", Categoria::PAR_BEGIN),
+                                 Token("si", Categoria::PALABRA_RESERVADA),
+                                 Token("(", Categoria::PAR_INICIO),
                                  Token("a", Categoria::IDENTIFICADOR),
-                                 Token("==", Categoria::RELOP),
+                                 Token("==", Categoria::OP_COMP),
                                  Token("b", Categoria::IDENTIFICADOR),
                                  Token("d", Categoria::IDENTIFICADOR),
-                                 Token("<", Categoria::RELOP),
+                                 Token("<", Categoria::OP_COMP),
                                  Token("e", Categoria::IDENTIFICADOR),
-                                 Token("(", Categoria::PAR_BEGIN),
+                                 Token("(", Categoria::PAR_INICIO),
                                  Token("d", Categoria::IDENTIFICADOR),
-                                 Token(">=", Categoria::RELOP),
+                                 Token(">=", Categoria::OP_COMP),
                                  Token("f", Categoria::IDENTIFICADOR),
-                                 Token(")", Categoria::PAR_END),
-                                 Token(")", Categoria::PAR_END),
-                                 Token("{", Categoria::CUR_BRACKET_BEGIN),
-                                 Token("retorno", Categoria::RESERV_WORD),
+                                 Token(")", Categoria::PAR_FINAL),
+                                 Token(")", Categoria::PAR_FINAL),
+                                 Token("{", Categoria::LLAVES_INICIO),
+                                 Token("retorno", Categoria::PALABRA_RESERVADA),
                                  Token("1", Categoria::NUMERO),
-                                 Token("}", Categoria::CUR_BRACKET_END)
+                                 Token("}", Categoria::LLAVES_FINAL)
                                  };
   EXPECT_EQ(tokens, expected);
 }
@@ -275,30 +275,30 @@ TEST(funcTest, basicTest) {
   }
 
   std::vector<Token> expected = {
-                                 Token("sin_tipo", Categoria::RESERV_WORD),
+                                 Token("sin_tipo", Categoria::PALABRA_RESERVADA),
                                  Token("fib", Categoria::IDENTIFICADOR),
-                                 Token("(", Categoria::PAR_BEGIN),
-                                 Token(")", Categoria::PAR_END),
-                                 Token("{", Categoria::CUR_BRACKET_BEGIN),
-                                 Token("si", Categoria::RESERV_WORD),
-                                 Token("(", Categoria::PAR_BEGIN),
+                                 Token("(", Categoria::PAR_INICIO),
+                                 Token(")", Categoria::PAR_FINAL),
+                                 Token("{", Categoria::LLAVES_INICIO),
+                                 Token("si", Categoria::PALABRA_RESERVADA),
+                                 Token("(", Categoria::PAR_INICIO),
                                  Token("a", Categoria::IDENTIFICADOR),
-                                 Token("==", Categoria::RELOP),
+                                 Token("==", Categoria::OP_COMP),
                                  Token("b", Categoria::IDENTIFICADOR),
                                  Token("d", Categoria::IDENTIFICADOR),
-                                 Token("<", Categoria::RELOP),
+                                 Token("<", Categoria::OP_COMP),
                                  Token("e", Categoria::IDENTIFICADOR),
-                                 Token("(", Categoria::PAR_BEGIN),
+                                 Token("(", Categoria::PAR_INICIO),
                                  Token("d", Categoria::IDENTIFICADOR),
-                                 Token(">=", Categoria::RELOP),
+                                 Token(">=", Categoria::OP_COMP),
                                  Token("f", Categoria::IDENTIFICADOR),
-                                 Token(")", Categoria::PAR_END),
-                                 Token(")", Categoria::PAR_END),
-                                 Token("{", Categoria::CUR_BRACKET_BEGIN),
-                                 Token("retorno", Categoria::RESERV_WORD),
+                                 Token(")", Categoria::PAR_FINAL),
+                                 Token(")", Categoria::PAR_FINAL),
+                                 Token("{", Categoria::LLAVES_INICIO),
+                                 Token("retorno", Categoria::PALABRA_RESERVADA),
                                  Token("1", Categoria::NUMERO),
-                                 Token("}", Categoria::CUR_BRACKET_END),
-                                 Token("}", Categoria::CUR_BRACKET_END)
+                                 Token("}", Categoria::LLAVES_FINAL),
+                                 Token("}", Categoria::LLAVES_FINAL)
                                  };
   EXPECT_EQ(tokens, expected);
 }
@@ -316,14 +316,14 @@ TEST(funcTest1, basicTest) {
   }
 
   std::vector<Token> expected = {
-                                 Token("sin_tipo", Categoria::RESERV_WORD),
+                                 Token("sin_tipo", Categoria::PALABRA_RESERVADA),
                                  Token("fib", Categoria::IDENTIFICADOR),
-                                 Token("(", Categoria::PAR_BEGIN),
-                                 Token(")", Categoria::PAR_END),
-                                 Token("{", Categoria::CUR_BRACKET_BEGIN),
-                                 Token("retorno", Categoria::RESERV_WORD),
+                                 Token("(", Categoria::PAR_INICIO),
+                                 Token(")", Categoria::PAR_FINAL),
+                                 Token("{", Categoria::LLAVES_INICIO),
+                                 Token("retorno", Categoria::PALABRA_RESERVADA),
                                  Token("1", Categoria::NUMERO),
-                                 Token("}", Categoria::CUR_BRACKET_END)
+                                 Token("}", Categoria::LLAVES_FINAL)
                                  };
   EXPECT_EQ(tokens, expected);
 }
@@ -341,23 +341,23 @@ TEST(ifelse, basicTest) {
   }
 
   std::vector<Token> expected = {
-                                 Token("si", Categoria::RESERV_WORD),
-                                 Token("(", Categoria::PAR_BEGIN),
+                                 Token("si", Categoria::PALABRA_RESERVADA),
+                                 Token("(", Categoria::PAR_INICIO),
                                  Token("a", Categoria::IDENTIFICADOR),
-                                 Token(")", Categoria::PAR_END),
-                                 Token("retorno", Categoria::RESERV_WORD),
+                                 Token(")", Categoria::PAR_FINAL),
+                                 Token("retorno", Categoria::PALABRA_RESERVADA),
                                  Token("1", Categoria::NUMERO),
-                                 Token("sino", Categoria::RESERV_WORD),
-                                 Token("(", Categoria::PAR_BEGIN),
+                                 Token("sino", Categoria::PALABRA_RESERVADA),
+                                 Token("(", Categoria::PAR_INICIO),
                                  Token("b", Categoria::IDENTIFICADOR),
-                                 Token(")", Categoria::PAR_END),
-                                 Token("retorno", Categoria::RESERV_WORD),
+                                 Token(")", Categoria::PAR_FINAL),
+                                 Token("retorno", Categoria::PALABRA_RESERVADA),
                                  Token("0", Categoria::NUMERO)
                                  };
   EXPECT_EQ(tokens, expected);
 }
 
-
+// TODO: este test falla
 TEST(lexicographicError, basicTest) {
   std::istrstream str("entero numero = +20; entero numro = -20;");
 
@@ -371,17 +371,70 @@ TEST(lexicographicError, basicTest) {
   }
 
   std::vector<Token> expected = {
-                                 Token("entero", Categoria::RESERV_WORD),
+                                 Token("entero", Categoria::PALABRA_RESERVADA),
                                  Token("numero", Categoria::IDENTIFICADOR),
-                                 Token("=", Categoria::ASSIGN),
+                                 Token("=", Categoria::ASIGNAR),
                                  Token("+20", Categoria::NUMERO),
-                                 Token("entero", Categoria::RESERV_WORD),
+                                 Token("entero", Categoria::PALABRA_RESERVADA),
                                  Token("numro", Categoria::IDENTIFICADOR),
-                                 Token("=", Categoria::ASSIGN),
+                                 Token("=", Categoria::ASIGNAR),
                                  Token("-20", Categoria::NUMERO)
                                  };
   EXPECT_EQ(tokens, expected);
 }
+
+// TODO: este test falla
+TEST(lexicographicError1, basicTest) {
+  std::istrstream str("entero numero = +20; entero num3ro = -20;");
+
+  FlexScanner scanner(str, std::cout);
+  std::vector<Token> tokens;
+
+  while (1) {
+    auto token = scanner.get_token();
+    if (token._atributo == END) break;
+    tokens.push_back(token);
+  }
+
+  std::vector<Token> expected = {
+                                 Token("entero", Categoria::PALABRA_RESERVADA),
+                                 Token("numero", Categoria::IDENTIFICADOR),
+                                 Token("=", Categoria::ASIGNAR),
+                                 Token("+20", Categoria::NUMERO),
+                                 Token("entero", Categoria::PALABRA_RESERVADA),
+                                 Token("num3ro", Categoria::ERROR),
+                                 Token("=", Categoria::ASIGNAR),
+                                 Token("-20", Categoria::NUMERO)
+                                 };
+  EXPECT_EQ(tokens, expected);
+}
+
+// TODO: este test falla
+TEST(lexicographicError2, basicTest) {
+  std::istrstream str("entero % = +20; entero ? = -20;");
+
+  FlexScanner scanner(str, std::cout);
+  std::vector<Token> tokens;
+
+  while (1) {
+    auto token = scanner.get_token();
+    if (token._atributo == END) break;
+    tokens.push_back(token);
+  }
+
+  std::vector<Token> expected = {
+                                 Token("entero", Categoria::PALABRA_RESERVADA),
+                                 Token("%", Categoria::IDENTIFICADOR),
+                                 Token("=", Categoria::ASIGNAR),
+                                 Token("+20", Categoria::NUMERO),
+                                 Token("entero", Categoria::PALABRA_RESERVADA),
+                                 Token("?", Categoria::ERROR),
+                                 Token("=", Categoria::ASIGNAR),
+                                 Token("-20", Categoria::NUMERO)
+                                 };
+  EXPECT_EQ(tokens, expected);
+}
+
 
 int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
