@@ -26,7 +26,12 @@ entero|retorno|sin_tipo|mientras|si|sino|main return Categoria::PALABRA_RESERVAD
 %{
     /* simbolos especiales */
 %}
-"!="|"=="|"<"|">"|"<="|">=" return Categoria::OP_COMP;
+"!=" return Categoria::OP_COMP;
+"==" return Categoria::OP_COMP;
+"<" return Categoria::OP_COMP;
+">" return Categoria::OP_COMP;
+"<=" return Categoria::OP_COMP;
+">=" return Categoria::OP_COMP;
 "+" return Categoria::OP_SUMA;
 "-" return Categoria::OP_RESTA;
 "*" return Categoria::OP_MUL;
