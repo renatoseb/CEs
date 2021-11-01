@@ -424,7 +424,7 @@ TEST(lexicographicError2, basicTest) {
 
   std::vector<Token> expected = {
                                  Token("entero", Categoria::PALABRA_RESERVADA),
-                                 Token("%", Categoria::IDENTIFICADOR),
+                                 Token("%", Categoria::ERROR),
                                  Token("=", Categoria::ASIGNAR),
                                  Token("+20", Categoria::NUMERO),
                                  Token("entero", Categoria::PALABRA_RESERVADA),
