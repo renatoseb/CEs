@@ -409,7 +409,6 @@ TEST(lexicographicError1, basicTest) {
   EXPECT_EQ(tokens, expected);
 }
 
-// TODO: este test falla
 TEST(lexicographicError2, basicTest) {
   std::istrstream str("entero % = +20; entero ? = -20;");
 

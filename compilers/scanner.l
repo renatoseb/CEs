@@ -45,7 +45,7 @@ entero|retorno|sin_tipo|mientras|si|sino|main return Categoria::PALABRA_RESERVAD
 "{" return Categoria::LLAVES_INICIO;
 "}" return Categoria::LLAVES_FINAL;
 
-
+[({LETRAS}+{DIGITO}+)+] return Categoria::ERROR; 
 [^({LETRAS}+|" "|";"|"\n"|"&&")+] return Categoria::ERROR;
 .|\n
 %%
