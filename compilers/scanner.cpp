@@ -1,6 +1,6 @@
-#line 2 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.cpp"
+#line 2 "/home/kali/Desktop/github/CEs/compilers/scanner.cpp"
 
-#line 4 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.cpp"
+#line 4 "/home/kali/Desktop/github/CEs/compilers/scanner.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -314,8 +314,8 @@ int yyFlexLexer::yywrap() { return 1; }
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 27
-#define YY_END_OF_BUFFER 28
+#define YY_NUM_RULES 22
+#define YY_END_OF_BUFFER 23
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -323,15 +323,15 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[71] =
+static const flex_int16_t yy_accept[68] =
     {   0,
-        0,    0,   28,   25,   26,   25,   18,   19,   14,   12,
-       17,   13,   15,    3,    8,   16,    9,    2,    2,   20,
-       21,    2,    2,    2,    2,    2,   22,   23,    6,    3,
-        0,    0,   11,    7,   10,    2,   24,    2,    2,    2,
-        2,    2,    1,    0,    0,    4,    2,    2,    2,    2,
-        2,    5,    4,    4,    2,    1,    2,    2,    0,    2,
-        2,    2,    0,    2,    2,    0,    2,    0,    1,    0
+        0,    0,   23,   20,   21,   20,   13,   14,    9,    7,
+       12,    8,   10,    3,    6,   11,    6,    2,    2,   15,
+       16,    2,    2,    2,    2,    2,   17,   18,    6,    3,
+        0,    0,    2,   19,    2,    2,    2,    2,    2,    1,
+        0,    0,    4,    2,    2,    2,    2,    2,    5,    4,
+        4,    2,    1,    2,    2,    0,    2,    2,    2,    0,
+        2,    2,    0,    2,    0,    1,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -374,28 +374,28 @@ static const YY_CHAR yy_meta[36] =
         4,    4,    4,    1,    1
     } ;
 
-static const flex_int16_t yy_base[75] =
+static const flex_int16_t yy_base[72] =
     {   0,
         0,    0,  125,  126,  126,  109,  126,  126,  126,  110,
       126,  109,  114,   25,  105,  104,  103,    0,    0,  126,
       126,   24,   27,   24,   23,   28,  126,  126,  126,   46,
-      110,  103,  126,  126,  126,    0,    0,   87,   25,   34,
-       36,   35,   86,  106,   58,   53,   46,   84,   83,   47,
-       51,  126,   97,   96,   53,   80,   49,   55,   73,   59,
-       61,   41,   41,   62,   65,   19,   63,   10,  126,  126,
-       93,   96,  100,  103
+      110,  103,    0,    0,   87,   25,   34,   36,   35,   86,
+      106,   58,   53,   46,   84,   83,   47,   51,  126,   97,
+       96,   53,   80,   49,   55,   73,   59,   61,   41,   41,
+       62,   65,   19,   63,   10,  126,  126,   93,   96,  100,
+      103
     } ;
 
-static const flex_int16_t yy_def[75] =
+static const flex_int16_t yy_def[72] =
     {   0,
-       70,    1,   70,   70,   70,   70,   70,   70,   70,   70,
-       70,   70,   70,   70,   70,   70,   70,   71,   71,   70,
-       70,   72,   72,   23,   23,   23,   70,   70,   70,   70,
-       73,   70,   70,   70,   70,   71,   74,   23,   23,   23,
-       23,   23,   23,   73,   73,   70,   23,   23,   23,   23,
-       23,   70,   70,   70,   23,   23,   23,   23,   70,   23,
-       23,   23,   70,   23,   23,   70,   23,   70,   70,    0,
-       70,   70,   70,   70
+       67,    1,   67,   67,   67,   67,   67,   67,   67,   67,
+       67,   67,   67,   67,   67,   67,   67,   68,   68,   67,
+       67,   69,   69,   23,   23,   23,   67,   67,   67,   67,
+       70,   67,   68,   71,   23,   23,   23,   23,   23,   23,
+       70,   70,   67,   23,   23,   23,   23,   23,   67,   67,
+       67,   23,   23,   23,   23,   67,   23,   23,   23,   67,
+       23,   23,   67,   23,   67,   67,    0,   67,   67,   67,
+       67
     } ;
 
 static const flex_int16_t yy_nxt[162] =
@@ -403,21 +403,21 @@ static const flex_int16_t yy_nxt[162] =
         4,    5,    5,    6,    7,    8,    9,   10,   11,   12,
         4,   13,   14,   15,   16,   17,   18,   19,   18,   20,
        21,    4,   22,   22,   23,   22,   24,   22,   22,   22,
-       25,   26,   22,   27,   28,   32,   37,   30,   69,   37,
-       36,   36,   36,   36,   36,   36,   40,   42,   68,   41,
-       38,   38,   38,   43,   39,   38,   32,   47,   30,   48,
-       49,   38,   38,   38,   45,   53,   66,   50,   65,   52,
-       55,   54,   59,   38,   38,   58,   38,   54,   38,   56,
-       38,   61,   38,   60,   67,   62,   38,   56,   38,   38,
-       38,   64,   38,   56,   56,   36,   36,   38,   38,   38,
+       25,   26,   22,   27,   28,   32,   34,   30,   66,   34,
+       33,   33,   33,   33,   33,   33,   37,   39,   65,   38,
+       35,   35,   35,   40,   36,   35,   32,   44,   30,   45,
+       46,   35,   35,   35,   42,   50,   63,   47,   62,   49,
+       52,   51,   56,   35,   35,   55,   35,   51,   35,   53,
+       35,   58,   35,   57,   64,   59,   35,   53,   35,   35,
+       35,   61,   35,   53,   53,   33,   33,   35,   35,   35,
 
-       44,   44,   44,   44,   37,   63,   37,   38,   53,   53,
-       57,   56,   45,   51,   38,   46,   45,   35,   34,   33,
-       31,   30,   30,   29,   70,    3,   70,   70,   70,   70,
-       70,   70,   70,   70,   70,   70,   70,   70,   70,   70,
-       70,   70,   70,   70,   70,   70,   70,   70,   70,   70,
-       70,   70,   70,   70,   70,   70,   70,   70,   70,   70,
-       70
+       41,   41,   41,   41,   34,   60,   34,   35,   50,   50,
+       54,   53,   42,   48,   35,   43,   42,   29,   29,   29,
+       31,   30,   30,   29,   67,    3,   67,   67,   67,   67,
+       67,   67,   67,   67,   67,   67,   67,   67,   67,   67,
+       67,   67,   67,   67,   67,   67,   67,   67,   67,   67,
+       67,   67,   67,   67,   67,   67,   67,   67,   67,   67,
+       67
     } ;
 
 static const flex_int16_t yy_chk[162] =
@@ -425,21 +425,21 @@ static const flex_int16_t yy_chk[162] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,   14,   22,   14,   68,   23,
-       22,   22,   22,   23,   23,   23,   24,   25,   66,   24,
-       25,   24,   39,   26,   23,   26,   30,   39,   30,   40,
-       41,   40,   42,   41,   45,   46,   63,   42,   62,   45,
-       47,   46,   51,   47,   50,   50,   57,   46,   51,   51,
-       55,   57,   58,   55,   64,   58,   60,   60,   61,   64,
-       67,   61,   65,   65,   67,   71,   71,   72,   72,   72,
+        1,    1,    1,    1,    1,   14,   22,   14,   65,   23,
+       22,   22,   22,   23,   23,   23,   24,   25,   63,   24,
+       25,   24,   36,   26,   23,   26,   30,   36,   30,   37,
+       38,   37,   39,   38,   42,   43,   60,   39,   59,   42,
+       44,   43,   48,   44,   47,   47,   54,   43,   48,   48,
+       52,   54,   55,   52,   61,   55,   57,   57,   58,   61,
+       64,   58,   62,   62,   64,   68,   68,   69,   69,   69,
 
-       73,   73,   73,   73,   74,   59,   74,   56,   54,   53,
-       49,   48,   44,   43,   38,   32,   31,   17,   16,   15,
-       13,   12,   10,    6,    3,   70,   70,   70,   70,   70,
-       70,   70,   70,   70,   70,   70,   70,   70,   70,   70,
-       70,   70,   70,   70,   70,   70,   70,   70,   70,   70,
-       70,   70,   70,   70,   70,   70,   70,   70,   70,   70,
-       70
+       70,   70,   70,   70,   71,   56,   71,   53,   51,   50,
+       46,   45,   41,   40,   35,   32,   31,   17,   16,   15,
+       13,   12,   10,    6,    3,   67,   67,   67,   67,   67,
+       67,   67,   67,   67,   67,   67,   67,   67,   67,   67,
+       67,   67,   67,   67,   67,   67,   67,   67,   67,   67,
+       67,   67,   67,   67,   67,   67,   67,   67,   67,   67,
+       67
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -449,11 +449,11 @@ static const flex_int16_t yy_chk[162] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-#line 1 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-#line 2 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
+#line 1 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
+#line 2 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
 #include "Enums.h"
-#line 456 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.cpp"
-#line 457 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.cpp"
+#line 456 "/home/kali/Desktop/github/CEs/compilers/scanner.cpp"
+#line 457 "/home/kali/Desktop/github/CEs/compilers/scanner.cpp"
 
 #define INITIAL 0
 
@@ -585,15 +585,15 @@ YY_DECL
 		}
 
 	{
-#line 9 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
+#line 9 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
 
 
 
 
-#line 14 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
+#line 14 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
     /* palabras reservadas */
 
-#line 597 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.cpp"
+#line 597 "/home/kali/Desktop/github/CEs/compilers/scanner.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -620,7 +620,7 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 71 )
+				if ( yy_current_state >= 68 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -652,22 +652,22 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 16 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
+#line 16 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
 return Categoria::PALABRA_RESERVADA;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 18 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
+#line 18 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
 return Categoria::IDENTIFICADOR;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 19 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
+#line 19 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
 return Categoria::NUMERO;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 20 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
+#line 20 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
 return Categoria::NUMERO; 
 	YY_BREAK
 
@@ -676,7 +676,7 @@ return Categoria::NUMERO;
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 25 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
+#line 25 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
 ;
 	YY_BREAK
 
@@ -684,116 +684,91 @@ YY_RULE_SETUP
 
 case 6:
 YY_RULE_SETUP
-#line 30 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
+#line 30 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
 return Categoria::OP_COMP;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 31 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-return Categoria::OP_COMP;
+#line 31 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
+return Categoria::OP_SUMA;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 32 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-return Categoria::OP_COMP;
+#line 32 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
+return Categoria::OP_RESTA;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 33 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-return Categoria::OP_COMP;
+#line 33 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
+return Categoria::OP_MUL;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 34 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-return Categoria::OP_COMP;
+#line 34 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
+return Categoria::OP_DIV;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 35 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-return Categoria::OP_COMP;
+#line 35 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
+return Categoria::ASIGNAR;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 36 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-return Categoria::OP_SUMA;
+#line 36 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
+return Categoria::COMA;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 37 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-return Categoria::OP_RESTA;
+#line 37 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
+return Categoria::PAR_INICIO;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 38 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-return Categoria::OP_MUL;
+#line 38 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
+return Categoria::PAR_FINAL;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 39 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-return Categoria::OP_DIV;
+#line 39 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
+return Categoria::CORCH_INICIO;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 40 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-return Categoria::ASIGNAR;
+#line 40 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
+return Categoria::CORCH_FINAL;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 41 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-return Categoria::COMA;
+#line 41 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
+return Categoria::LLAVES_INICIO;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 42 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-return Categoria::PAR_INICIO;
+#line 42 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
+return Categoria::LLAVES_FINAL;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 43 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-return Categoria::PAR_FINAL;
+#line 44 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
+return Categoria::ERROR; 
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 44 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-return Categoria::CORCH_INICIO;
+#line 45 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
+return Categoria::ERROR;
 	YY_BREAK
 case 21:
+/* rule 21 can match eol */
 YY_RULE_SETUP
-#line 45 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-return Categoria::CORCH_FINAL;
+#line 46 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
+
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 46 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-return Categoria::LLAVES_INICIO;
-	YY_BREAK
-case 23:
-YY_RULE_SETUP
-#line 47 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-return Categoria::LLAVES_FINAL;
-	YY_BREAK
-case 24:
-YY_RULE_SETUP
-#line 49 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-return Categoria::ERROR; 
-	YY_BREAK
-case 25:
-YY_RULE_SETUP
-#line 50 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-return Categoria::ERROR;
-	YY_BREAK
-case 26:
-/* rule 26 can match eol */
-YY_RULE_SETUP
-#line 51 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
-
-	YY_BREAK
-case 27:
-YY_RULE_SETUP
-#line 52 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
+#line 47 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
 ECHO;
 	YY_BREAK
-#line 797 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.cpp"
+#line 772 "/home/kali/Desktop/github/CEs/compilers/scanner.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1210,7 +1185,7 @@ int yyFlexLexer::yy_get_next_buffer()
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 71 )
+			if ( yy_current_state >= 68 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1238,11 +1213,11 @@ int yyFlexLexer::yy_get_next_buffer()
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 71 )
+		if ( yy_current_state >= 68 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 70);
+	yy_is_jam = (yy_current_state == 67);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1756,6 +1731,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 52 "/home/rrodriguez/2021-2/compiladores/proyecto/CEs/compilers/scanner.l"
+#line 47 "/home/kali/Desktop/github/CEs/compilers/scanner.l"
 
 

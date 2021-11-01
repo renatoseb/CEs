@@ -434,6 +434,111 @@ TEST(lexicographicError2, basicTest) {
   EXPECT_EQ(tokens, expected);
 }
 
+TEST(funcTest2, basicTest) {
+  std::istrstream str("entero foo(){ entero a = 10; retorno a; }");
+
+  FlexScanner scanner(str, std::cout);
+  std::vector<Token> tokens;
+
+  while (1) {
+    auto token = scanner.get_token();
+    if (token._atributo == END) break;
+    tokens.push_back(token);
+  }
+
+  std::vector<Token> expected = {Token("entero", Categoria::PALABRA_RESERVADA),
+                                 Token("foo", Categoria::IDENTIFICADOR),
+                                 Token("(", Categoria::PAR_INICIO),
+                                 Token(")", Categoria::PAR_FINAL),
+                                 Token("{", Categoria::LLAVES_INICIO),
+                                 Token("entero", Categoria::PALABRA_RESERVADA),
+                                 Token("a", Categoria::IDENTIFICADOR),
+                                 Token("=", Categoria::ASIGNAR),
+                                 Token("10", Categoria::NUMERO),
+                                 Token("retorno", Categoria::PALABRA_RESERVADA),
+                                 Token("a", Categoria::IDENTIFICADOR),
+                                 Token("}", Categoria::LLAVES_FINAL),
+                                 };
+  EXPECT_EQ(tokens, expected);
+}
+
+TEST(funcTest3, basicTest) {
+  std::istrstream str("entero foo(entero a, entero b){ si(a == b){retorno 1;} sino(a != b){retorno 0;} }");
+
+  FlexScanner scanner(str, std::cout);
+  std::vector<Token> tokens;
+
+  while (1) {
+    auto token = scanner.get_token();
+    if (token._atributo == END) break;
+    tokens.push_back(token);
+  }
+
+  std::vector<Token> expected = {Token("entero", Categoria::PALABRA_RESERVADA),
+                                 Token("foo", Categoria::IDENTIFICADOR),
+                                 Token("(", Categoria::PAR_INICIO),
+                                 Token("entero", Categoria::PALABRA_RESERVADA),
+                                 Token("a", Categoria::IDENTIFICADOR),
+                                 Token(",", Categoria::COMA),
+                                 Token("entero", Categoria::PALABRA_RESERVADA),
+                                 Token("b", Categoria::IDENTIFICADOR),
+                                 Token(")", Categoria::PAR_FINAL),
+                                 Token("{", Categoria::LLAVES_INICIO),
+                                 Token("si", Categoria::PALABRA_RESERVADA),
+                                 Token("(", Categoria::PAR_INICIO),
+                                 Token("a", Categoria::IDENTIFICADOR),
+                                 Token("==", Categoria::OP_COMP),
+                                 Token("b", Categoria::IDENTIFICADOR),
+                                 Token(")", Categoria::PAR_FINAL),
+                                 Token("{", Categoria::LLAVES_INICIO),
+                                 Token("retorno", Categoria::PALABRA_RESERVADA),
+                                 Token("1", Categoria::NUMERO),
+                                 Token("}", Categoria::LLAVES_FINAL),
+                                 Token("sino", Categoria::PALABRA_RESERVADA),
+                                 Token("(", Categoria::PAR_INICIO),
+                                 Token("a", Categoria::IDENTIFICADOR),
+                                 Token("!=", Categoria::OP_COMP),
+                                 Token("b", Categoria::IDENTIFICADOR),
+                                 Token(")", Categoria::PAR_FINAL),
+                                 Token("{", Categoria::LLAVES_INICIO),
+                                 Token("retorno", Categoria::PALABRA_RESERVADA),
+                                 Token("0", Categoria::NUMERO),
+                                 Token("}", Categoria::LLAVES_FINAL),
+                                 Token("}", Categoria::LLAVES_FINAL),
+                                 };
+  EXPECT_EQ(tokens, expected);
+}
+
+TEST(funcTest4, basicTest) {
+  std::istrstream str("entero foo(entero a, entero b){ retorno a+b; }");
+
+  FlexScanner scanner(str, std::cout);
+  std::vector<Token> tokens;
+
+  while (1) {
+    auto token = scanner.get_token();
+    if (token._atributo == END) break;
+    tokens.push_back(token);
+  }
+
+  std::vector<Token> expected = {Token("entero", Categoria::PALABRA_RESERVADA),
+                                 Token("foo", Categoria::IDENTIFICADOR),
+                                 Token("(", Categoria::PAR_INICIO),
+                                 Token("entero", Categoria::PALABRA_RESERVADA),
+                                 Token("a", Categoria::IDENTIFICADOR),
+                                 Token(",", Categoria::COMA),
+                                 Token("entero", Categoria::PALABRA_RESERVADA),
+                                 Token("b", Categoria::IDENTIFICADOR),
+                                 Token(")", Categoria::PAR_FINAL),
+                                 Token("{", Categoria::LLAVES_INICIO),
+                                 Token("retorno", Categoria::PALABRA_RESERVADA),
+                                 Token("a", Categoria::IDENTIFICADOR),
+                                 Token("+", Categoria::OP_SUMA),
+                                 Token("b", Categoria::IDENTIFICADOR),
+                                 Token("}", Categoria::LLAVES_FINAL),
+                                 };
+  EXPECT_EQ(tokens, expected);
+}
 
 int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
