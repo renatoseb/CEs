@@ -36,6 +36,11 @@ extern "C" int yylex();
 %token LLAVES_FINAL
 %token TIPO_ENTERO
 %token SIN_TIPO
+%token SI
+%token SINO
+%token RETORNO
+%token MIENTRAS
+%token MAIN
 %token IDENTIFICADOR
 
 %%
@@ -80,13 +85,13 @@ params:
 ;
 
 lista_params:
-    lista_params, param {}
+    lista_params COMA param {}
   | param {}
 ;
 
 param:
     tipo IDENTIFICADOR {}
-  | tipo ID CORCH_INICIO CORCH_FINAL {}
+  | tipo IDENTIFICADOR CORCH_INICIO CORCH_FINAL {}
 ;
 
 sent_compuesta:
@@ -96,6 +101,27 @@ sent_compuesta:
 declaracion_local:
     declaracion_local var_declaracion {}
   | 
+;
+
+lista_sentencias:
+    lista_sentencias sentencia {}
+  | 
+;
+
+sentencia:
+    sentencia_expresion {}
+  | sentencia_seleccion {}
+  | sentencia_iteracion {}
+  | sentencia_retorno {}
+;
+
+sentencia_expresion:
+    expresion ; {}
+  | ;
+;
+
+sentencia_seleccion:
+    SI PAR_INICIO expresion PAR_FINAL sentencia {}
 ;
 
 

@@ -12,11 +12,16 @@ LETRA   [a-z]|[A-Z]
 
 %{
     /* palabras reservadas */
+    /* retorno|mientras|si|sino|main return PALABRA_RESERVADA; */
 %}
-retorno|mientras|si|sino|main return PALABRA_RESERVADA;
 
 entero { return TIPO_ENTERO; }
 sin_tipo { return SIN_TIPO; }
+retorno { return RETORNO; }
+mientras { return MIENTRAS; }
+si { return SI; }
+sino { return SINO; }
+main { return MAIN; }
 
 {LETRA}+  { return IDENTIFICADOR; }
 [+-]?{DIGITO}+ { yylval.intval = atoi(yytext); return NUMERO;}
