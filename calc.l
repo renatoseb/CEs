@@ -13,11 +13,13 @@ LETRA   [a-z]|[A-Z]
 %{
     /* palabras reservadas */
 %}
-entero|retorno|sin_tipo|mientras|si|sino|main return PALABRA_RESERVADA;
+retorno|mientras|si|sino|main return PALABRA_RESERVADA;
+
+entero { return TIPO_ENTERO; }
+sin_tipo { return SIN_TIPO; }
 
 {LETRA}+  { return IDENTIFICADOR; }
 [+-]?{DIGITO}+ { yylval.intval = atoi(yytext); return NUMERO;}
-[+-]?{DIGITO}+\.{DIGITO}[eE]?{DIGITO}?* {  yyval.fval = atof(yytext); return NUMERO; }
 
 %{
     /* obviar comentarios */
