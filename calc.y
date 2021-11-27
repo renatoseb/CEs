@@ -67,32 +67,7 @@ exp -> exp opsuma term -> term opsuma term
 
 %%
 
-input:		/* empty */
-		| exp	{ cout << "Result: " << $1 << endl; }
-		;
 
-exp:  exp opsuma term { $$ = $1 + $3; }
-    | exp oprest term { $$ = $1 - $3; }
-    | term  { $$ = $1; }
-    ;
-
-opsuma: PLUS
-    ;
-
-oprest: REST
-    ;
-
-term: term opmult factor  { $$ = $1 * $3; }
-    | factor  { $$ = $1; }
-    ;
-
-opmult: MULT
-    ;
-
-factor: PAR_BEGIN exp PAR_END { $$ = $2; }
-    | INTEGER_LITERAL 	{ $$ = $1; }
-    | oprest factor { $$ = - $2; }
-    ;
 %%
 
 int yyerror(string s)

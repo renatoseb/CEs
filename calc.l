@@ -6,23 +6,9 @@ int yyerror(char *s);
 %}
 
 DIGITO  [0-9]
-uint_const	{DIGITO}+
 LETRA   [a-z]|[A-Z]
 
 %%
-
-{uint_const}	{ yylval.int_val = atoi(yytext); return INTEGER_LITERAL; }
-"+"		{ yylval.op_val = new std::string(yytext); return PLUS; }
-"*"		{ yylval.op_val = new std::string(yytext); return MULT; }
-"-"     { yylval.op_val = new std::string(yytext); return REST; }
-"("     { return PAR_BEGIN; }
-")"     { return PAR_END; }
-
-[ \t]*		{}
-[\n]		{ yylineno++;	}
-
-.		{ std::cerr << "SCANNER "; yyerror(""); exit(1);	}
-
 
 %{
     /* palabras reservadas */
@@ -62,4 +48,7 @@ entero|retorno|sin_tipo|mientras|si|sino|main return PALABRA_RESERVADA;
 
 [a-z][a-z0-9]* { return ERROR; } 
 [^({LETRA}+|" "|";"|"\n"|"&&")+] { return ERROR; }
-.|\n
+[ \t]*		{}
+[\n]		{ yylineno++;	}
+
+.		{ std::cerr << "SCANNER "; yyerror(""); exit(1);	}
