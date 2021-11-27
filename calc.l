@@ -34,12 +34,12 @@ main { return MAIN; }
 %{
     /* simbolos especiales */
 %}
-"!="  { yylval.op_val = new std::string(yytext); return OP_COMP; }
-"=="  { yylval.op_val = new std::string(yytext); return OP_COMP; }
-"<"   { yylval.op_val = new std::string(yytext); return OP_COMP; }
-">"   { yylval.op_val = new std::string(yytext); return OP_COMP; }
-"<="  { yylval.op_val = new std::string(yytext); return OP_COMP; }
-">="  { yylval.op_val = new std::string(yytext); return OP_COMP; }
+"!="  { yylval.op_val = new std::string(yytext); return OP_COMP_DESIGUAL; }
+"=="  { yylval.op_val = new std::string(yytext); return OP_COMP_IGUAL; }
+"<"   { yylval.op_val = new std::string(yytext); return OP_COMP_MENOR; }
+">"   { yylval.op_val = new std::string(yytext); return OP_COMP_MAYOR; }
+"<="  { yylval.op_val = new std::string(yytext); return OP_COMP_MENOR_IGUAL; }
+">="  { yylval.op_val = new std::string(yytext); return OP_COMP_MAYOR_IGUAL; }
 "+"   { yylval.op_val = new std::string(yytext); return OP_SUMA; }
 "-"   { yylval.op_val = new std::string(yytext); return OP_RESTA; }
 "*"   { yylval.op_val = new std::string(yytext); return OP_MUL; }

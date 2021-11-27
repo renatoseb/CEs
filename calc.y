@@ -20,7 +20,12 @@ extern "C" int yylex();
 %type	<int_val>	term
 %type	<int_val>	factor
 
-%token OP_COMP
+%token OP_COMP_IGUAL
+%token OP_COMP_DESIGUAL
+%token OP_COMP_MENOR
+%token OP_COMP_MAYOR
+%token OP_COMP_MENOR_IGUAL
+%token OP_COMP_MAYOR_IGUAL
 %token ASIGNAR
 %token COMA
 %token OP_SUMA
@@ -51,19 +56,19 @@ lista_declaracion → lista_declaracion declaracion | declaracion
 
 */
 
-programa: 
-      lista_declaracion { cout << "Sintactic Analysis OK \n."; }
+programa:
+    lista_declaracion { cout << "Sintactic Analysis OK \n."; }
 ;
 
-lista_declaracion:  
-      lista_declaracion declaracion { cout << "Derivando a lista_declaracion declaracion \n" ; }
-    | declaracion { cout << "Derivando a declaracion \n "; }
-    ;
+lista_declaracion:
+    lista_declaracion declaracion { cout << "Derivando a lista_declaracion declaracion \n" ; }
+  | declaracion { cout << "Derivando a declaracion \n "; }
+;
 
 declaracion:
     var_declaracion {}
   | fun_declaracion {}
-  ;
+;
 
 var_declaracion:
     TIPO_ENTERO IDENTIFICADOR NUMERO { }
@@ -95,7 +100,7 @@ param:
 ;
 
 sent_compuesta:
-    CORCH_INICIO declaracion_local lista_sentencias CORCH_FINAL {}
+    LLAVES_INICIO declaracion_local lista_sentencias LLAVES_FINAL {}
 ;
 
 declaracion_local:
@@ -122,6 +127,81 @@ sentencia_expresion:
 
 sentencia_seleccion:
     SI PAR_INICIO expresion PAR_FINAL sentencia {}
+  | SI PAR_INICIO expresion PAR_FINAL sentencia SINO sentencia {}
+;
+
+sentencia_iteracion:
+    MIENTRAS PAR_INICIO expresion PAR_FINAL LLAVES_INICIO lista_sentencias LLAVES_FINAL {}
+;
+
+sentencia_retorno:
+    RETORNO ; {}
+  | RETORNO expresion ; {}
+;
+
+expresion:
+    var ASIGNAR expresion {}
+  | expresion_simple {}
+;
+
+var:
+    IDENTIFICADOR {}
+  | IDENTIFICADOR CORCH_INICIO expresion CORCH_FINAL {}
+;
+
+expresion_simple:
+    expresion_aditiva relop expresion_aditiva {}
+  | expresion_aditiva {}
+;
+
+relop:
+    OP_COMP_MENOR  {}
+  | OP_COMP_MENOR_IGUAL {}
+  | OP_COMP_MAYOR  {}
+  | OP_COMP_MAYOR_IGUAL {}
+  | OP_COMP_IGUAL {}
+  | OP_COMP_DESIGUAL {}
+;
+
+expresion_aditiva:
+    expresion_aditiva addop term {}
+  | term {}
+;
+
+addop:
+    OP_SUMA {}
+  | OP_RESTA {}
+;
+
+term:
+    term mulop factor {}
+  | factor {}
+;
+
+mulop:
+    OP_MUL {}
+  | OP_DIV {}
+;
+
+factor:
+    PAR_INICIO expresion PAR_FINAL {}
+  | var {}
+  | call {}
+  | NUMERO {}
+;
+
+call:
+    IDENTIFICADOR PAR_INICIO args PAR_FINAL {}
+;
+
+args:
+    lista_arg {}
+  |
+;
+
+lista_arg:
+    lista_arg COMA expresion {}
+  | expresion {}
 ;
 
 
