@@ -12,7 +12,6 @@ LETRA   [a-z]|[A-Z]
 
 %{
     /* palabras reservadas */
-    /* retorno|mientras|si|sino|main return PALABRA_RESERVADA; */
 %}
 
 entero { return TIPO_ENTERO; }
@@ -23,8 +22,9 @@ si { return SI; }
 sino { return SINO; }
 main { return MAIN; }
 
-{LETRA}+  { return IDENTIFICADOR; }
-[+-]?{DIGITO}+ { yylval.intval = atoi(yytext); return NUMERO;}
+{LETRA}+  { yylval.op_val = new std::string(yytext); return IDENTIFICADOR; }
+[+-]?{DIGITO}+ { yylval.int_val = atoi(yytext); return NUMERO;}
+
 
 %{
     /* obviar comentarios */
@@ -47,16 +47,16 @@ main { return MAIN; }
 "="   { yylval.op_val = new std::string(yytext); return ASIGNAR; }
 ","   { yylval.op_val = new std::string(yytext); return COMA; }
 ";"   { yylval.op_val = new std::string(yytext); return PUNTO_COMA; }
-"(" return PAR_INICIO;
-")" return PAR_FINAL;
-"[" return CORCH_INICIO;
-"]" return CORCH_FINAL;
-"{" return LLAVES_INICIO;
-"}" return LLAVES_FINAL;
+"(" { return PAR_INICIO; }
+")" { return PAR_FINAL; }
+"[" { return CORCH_INICIO;}
+"]" { return CORCH_FINAL; }
+"{" { return LLAVES_INICIO; }
+"}" { return LLAVES_FINAL; }
 
-[a-z][a-z0-9]* { return ERROR; } 
+[a-z][a-z0-9]* { return ERROR; }
 [^({LETRA}+|" "|";"|"\n"|"&&")+] { return ERROR; }
-[ \t]*		{}
-[\n]		{ yylineno++;	}
-
-.		{ std::cerr << "SCANNER "; yyerror(""); exit(1);	}
+[ \t]*	    ;
+[\n]		{ yylineno++; }
+.		{ std::cerr << "SCANNER"; yyerror(""); exit(1);	}
+%%

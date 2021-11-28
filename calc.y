@@ -1,18 +1,18 @@
-/* Mini Calculator */
-/* calc.y */
-
 %{
 
 #include "heading.h"
-#include "tok.h"
+
+extern int yylineno;
 int yyerror(char *s);
 extern "C" int yylex();
 
-struct util_token{
+class util_token{
   int* valores;
   int tam;
   int declaracion;
-
+  
+public:
+  util_token(){ }
   util_token(int _declaracion) {
     tam = 1;
     declaracion = declaracion;
@@ -26,19 +26,17 @@ struct util_token{
   }
 };
 
-unordered_map<string, util_token> tabla_simbolos;
+unordered_map<string*, util_token> tabla_simbolos;
 
 %}
 
 %union{
   int		int_val;
-  string string_val;
   string*	op_val;
 }
 
 %start	programa
 
-%type	<int_val>	exp
 %type	<int_val>	term
 %type	<int_val>	factor
 
@@ -54,7 +52,7 @@ unordered_map<string, util_token> tabla_simbolos;
 %token OP_RESTA
 %token OP_MUL
 %token OP_DIV
-%token	<int_val>	NUMERO
+%token <int_val>	NUMERO
 %token PAR_INICIO
 %token PAR_FINAL
 %token CORCH_INICIO
@@ -68,8 +66,9 @@ unordered_map<string, util_token> tabla_simbolos;
 %token RETORNO
 %token MIENTRAS
 %token MAIN
-%token <string_val> IDENTIFICADOR
+%token <op_val> IDENTIFICADOR
 %token PUNTO_COMA
+%token ERROR
 
 %%
 /*
