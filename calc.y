@@ -4,13 +4,35 @@
 %{
 
 #include "heading.h"
+#include "tok.h"
 int yyerror(char *s);
 extern "C" int yylex();
+
+struct util_token{
+  int* valores;
+  int tam;
+  int declaracion;
+
+  util_token(int _declaracion) {
+    tam = 1;
+    declaracion = declaracion;
+    valores = new int[tam];
+  }
+
+  util_token(int _tam, int _declaracion) {
+    tam = _tam;
+    declaracion = _declaracion;
+    valores = new int[tam];
+  }
+};
+
+unordered_map<string, util_token> tabla_simbolos;
 
 %}
 
 %union{
   int		int_val;
+  string string_val;
   string*	op_val;
 }
 
@@ -27,7 +49,7 @@ extern "C" int yylex();
 %token OP_COMP_MENOR_IGUAL
 %token OP_COMP_MAYOR_IGUAL
 %token ASIGNAR
-%token COMA
+%token COMA 
 %token OP_SUMA
 %token OP_RESTA
 %token OP_MUL
@@ -46,7 +68,8 @@ extern "C" int yylex();
 %token RETORNO
 %token MIENTRAS
 %token MAIN
-%token IDENTIFICADOR
+%token <string_val> IDENTIFICADOR
+%token PUNTO_COMA
 
 %%
 /*
@@ -66,13 +89,13 @@ lista_declaracion:
 ;
 
 declaracion:
-    var_declaracion {}
-  | fun_declaracion {}
+    var_declaracion { }
+  | fun_declaracion { }
 ;
 
 var_declaracion:
-    TIPO_ENTERO IDENTIFICADOR NUMERO { }
-  | TIPO_ENTERO IDENTIFICADOR CORCH_INICIO NUMERO CORCH_FINAL { }
+    TIPO_ENTERO IDENTIFICADOR { util_token tok(yylineno); tabla_simbolos[$2] = tok; }
+  | TIPO_ENTERO IDENTIFICADOR CORCH_INICIO NUMERO CORCH_FINAL { util_token tok($4, yylineno); tabla_simbolos[{$2}] = tok; }
 ;
 
 tipo:
@@ -121,8 +144,8 @@ sentencia:
 ;
 
 sentencia_expresion:
-    expresion ; {}
-  | ;
+    expresion PUNTO_COMA {}
+  | PUNTO_COMA
 ;
 
 sentencia_seleccion:
@@ -135,8 +158,8 @@ sentencia_iteracion:
 ;
 
 sentencia_retorno:
-    RETORNO ; {}
-  | RETORNO expresion ; {}
+    RETORNO PUNTO_COMA {}
+  | RETORNO expresion PUNTO_COMA {}
 ;
 
 expresion:

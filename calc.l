@@ -46,6 +46,7 @@ main { return MAIN; }
 "/"   { yylval.op_val = new std::string(yytext); return OP_DIV; }
 "="   { yylval.op_val = new std::string(yytext); return ASIGNAR; }
 ","   { yylval.op_val = new std::string(yytext); return COMA; }
+";"   { yylval.op_val = new std::string(yytext); return PUNTO_COMA; }
 "(" return PAR_INICIO;
 ")" return PAR_FINAL;
 "[" return CORCH_INICIO;
