@@ -47,12 +47,12 @@ main { return MAIN; }
 "="   { yylval.op_val = new std::string(yytext); return ASIGNAR; }
 ","   { yylval.op_val = new std::string(yytext); return COMA; }
 ";"   { yylval.op_val = new std::string(yytext); return PUNTO_COMA; }
-"(" { return PAR_INICIO; }
-")" { return PAR_FINAL; }
-"[" { return CORCH_INICIO;}
-"]" { return CORCH_FINAL; }
-"{" { return LLAVES_INICIO; }
-"}" { return LLAVES_FINAL; }
+"("   { yylval.op_val = new std::string(yytext); return PAR_INICIO; }
+")"   { yylval.op_val = new std::string(yytext); return PAR_FINAL; }
+"["   { yylval.op_val = new std::string(yytext); return CORCH_INICIO;}
+"]"   { yylval.op_val = new std::string(yytext); return CORCH_FINAL; }
+"{"   { yylval.op_val = new std::string(yytext); return LLAVES_INICIO; }
+"}"   { yylval.op_val = new std::string(yytext); return LLAVES_FINAL; }
 
 [a-z][a-z0-9]* { return ERROR; }
 [^({LETRA}+|" "|";"|"\n"|"&&")+] { return ERROR; }
