@@ -88,31 +88,35 @@ lista_declaracion:
 ;
 
 declaracion:
-    var_declaracion { cout << "var declaracion \n"; }
-  | fun_declaracion { cout << "fun declaracion \n"; }
+    TIPO_ENTERO IDENTIFICADOR declaracion_fact { cout << "fun declaracion \n"; }
+  | SIN_TIPO IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta { cout << "fun declaracion \n"; }
 ;
 
-var_declaracion:
-    TIPO_ENTERO IDENTIFICADOR PUNTO_COMA{ util_token tok(yylineno); tabla_simbolos[$2] = tok; }
-  | TIPO_ENTERO IDENTIFICADOR CORCH_INICIO NUMERO CORCH_FINAL PUNTO_COMA{ util_token tok($4, yylineno); tabla_simbolos[{$2}] = tok; }
+declaracion_fact:
+  var_declaracion_fact
+  | PAR_INICIO params PAR_FINAL sent_compuesta
 ;
+
+// var_declaracion:
+//    TIPO_ENTERO IDENTIFICADOR var_declaracion_fact {}
+//;
 
 var_declaracion_fact:
   PUNTO_COMA
   | CORCH_INICIO NUMERO CORCH_FINAL PUNTO_COMA
 ;
 
-tipo:
+/* tipo:
     TIPO_ENTERO { }
   | SIN_TIPO { }
-;
+; */
 
-fun_declaracion:
+/* fun_declaracion:
     tipo IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta { cout << "fun declaracion in \n"; }
-;
+; */
 
 
-params:
+ params:
     lista_params {}
   | SIN_TIPO {}
 ;
@@ -122,6 +126,7 @@ lista_params:
   | param {}
 ;
 
+// TODO: Falta arreglar esta parte, la regla tipo se factorizo para que no hayan ambiguedad
 param:
     tipo IDENTIFICADOR {}
   | tipo IDENTIFICADOR CORCH_INICIO CORCH_FINAL {}
@@ -131,6 +136,7 @@ sent_compuesta:
     LLAVES_INICIO declaracion_local lista_sentencias LLAVES_FINAL {}
 ;
 
+// TODO: Falta arregalr esta parte, la regla var_declaracion se factorizo para que no haya ambiguedad
 declaracion_local:
     declaracion_local var_declaracion {}
   | 
@@ -230,7 +236,7 @@ args:
 lista_arg:
     lista_arg COMA expresion {}
   | expresion {}
-;
+; 
 
 
 %%
