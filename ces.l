@@ -6,7 +6,7 @@ int yyerror(char *s);
 %}
 
 DIGITO  [0-9]
-LETRA   [a-z]|[A-Z]
+LETRA   [a-zA-Z]
 
 %%
 

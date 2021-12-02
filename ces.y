@@ -79,7 +79,7 @@ lista_declaracion → lista_declaracion declaracion | declaracion
 */
 
 programa:
-    lista_declaracion { cout << "Sintactic Analysis OK.\n "; }
+    lista_declaracion {  }
 ;
 
 lista_declaracion:
@@ -97,6 +97,11 @@ var_declaracion:
   | TIPO_ENTERO IDENTIFICADOR CORCH_INICIO NUMERO CORCH_FINAL PUNTO_COMA{ util_token tok($4, yylineno); tabla_simbolos[{$2}] = tok; }
 ;
 
+var_declaracion_fact:
+  PUNTO_COMA
+  | CORCH_INICIO NUMERO CORCH_FINAL PUNTO_COMA
+;
+
 tipo:
     TIPO_ENTERO { }
   | SIN_TIPO { }
@@ -105,6 +110,7 @@ tipo:
 fun_declaracion:
     tipo IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta { cout << "fun declaracion in \n"; }
 ;
+
 
 params:
     lista_params {}
