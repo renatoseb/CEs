@@ -54,13 +54,13 @@ programa:
 ;
 
 lista_declaracion:
-    lista_declaracion declaracion { cout << "Derivando a lista_declaracion declaracion \n" ; }
-  | declaracion { cout << "Derivando a declaracion \n "; }
+    lista_declaracion declaracion { std::cout << "Derivando a lista_declaracion declaracion \n" ; }
+  | declaracion { std::cout << "Derivando a declaracion \n "; }
 ;
 
 declaracion:
-    TIPO_ENTERO IDENTIFICADOR declaracion_fact { cout << "fun declaracion \n"; }
-  | SIN_TIPO IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta { cout << "fun declaracion \n"; }
+    TIPO_ENTERO IDENTIFICADOR declaracion_fact { std::cout << "fun declaracion \n"; }
+  | SIN_TIPO IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta { std::cout << "fun declaracion \n"; }
 ;
 
 declaracion_fact:
@@ -83,7 +83,7 @@ var_declaracion_fact:
 ; */
 
 /* fun_declaracion:
-    tipo IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta { cout << "fun declaracion in \n"; }
+    tipo IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta { std::cout << "fun declaracion in \n"; }
 ; */
 
 

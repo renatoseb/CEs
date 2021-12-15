@@ -49,11 +49,6 @@ main { return Parser::token::MAIN; }
 "{"   { yylval->op_val = new std::string(yytext); return Parser::token::LLAVES_INICIO; }
 "}"   { yylval->op_val = new std::string(yytext); return Parser::token::LLAVES_FINAL; }
 
-"+"		{ return Parser::token::PLUS; }
-"*"		{ return Parser::token::MULT; }
-"-"     { return Parser::token::REST; }
-"("     { return Parser::token::PAR_BEGIN; }
-")"     { return Parser::token::PAR_END; }
 
 [a-z][a-z0-9]* { return Parser::token::ERROR; }
 [^({LETRA}+|" "|";"|"\n"|"&&")+] { return Parser::token::ERROR; }
