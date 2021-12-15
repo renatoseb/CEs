@@ -1,3 +1,0 @@
-/home/kali/Desktop/github/CEs/compilers/build/CMakeFiles/rebuild_cache.dir
-/home/kali/Desktop/github/CEs/compilers/build/CMakeFiles/edit_cache.dir
-/home/kali/Desktop/github/CEs/compilers/build/CMakeFiles/compilers.dir
