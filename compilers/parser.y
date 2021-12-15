@@ -59,13 +59,13 @@ lista_declaracion:
 ;
 
 declaracion:
-    TIPO_ENTERO IDENTIFICADOR declaracion_fact { std::cout << "fun declaracion \n"; }
-  | SIN_TIPO IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta { std::cout << "fun declaracion \n"; }
+    TIPO_ENTERO IDENTIFICADOR declaracion_fact { std::cout << "fun declaracion1 \n"; }
+  | SIN_TIPO IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta { std::cout << "fun declaracion2 \n"; }
 ;
 
 declaracion_fact:
-  var_declaracion_fact
-  | PAR_INICIO params PAR_FINAL sent_compuesta
+    var_declaracion_fact {}
+  | PAR_INICIO params PAR_FINAL sent_compuesta { std::cout << "esta corriendo bien" << std::endl; }
 ;
 
 // var_declaracion:
@@ -73,7 +73,7 @@ declaracion_fact:
 //;
 
 var_declaracion_fact:
-    PUNTO_COMA
+    PUNTO_COMA {std::cout << "punto y coma" << std::endl;}
   | CORCH_INICIO NUMERO CORCH_FINAL PUNTO_COMA
 ;
 
@@ -89,7 +89,7 @@ var_declaracion_fact:
 
 params:
     lista_params {}
-  | SIN_TIPO {}
+  | { /* sin tipo cambiado por epsilon para representar que una funcion puede no tener parametros*/}
 ;
 
 lista_params:
@@ -106,17 +106,17 @@ param:
 ;
 
 sent_compuesta:
-    LLAVES_INICIO declaracion_local lista_sentencias LLAVES_FINAL {}
+    LLAVES_INICIO declaracion_local lista_sentencias LLAVES_FINAL {std::cout << "sentencia compuesta" << std::endl;}
 ;
 
 // TODO: Falta arregalr esta parte, la regla var_declaracion se factorizo para que no haya ambiguedad
 declaracion_local:
-    declaracion_local var_declaracion_fact {}
+    declaracion_local TIPO_ENTERO IDENTIFICADOR var_declaracion_fact {std::cout << "declaracion local" << std::endl;}
   |
 ;
 
 lista_sentencias:
-    lista_sentencias sentencia {}
+    lista_sentencias sentencia {std::cout << "LISTA SENTENCIAS" << std::endl;}
   |
 ;
 
@@ -128,13 +128,19 @@ sentencia:
 ;
 
 sentencia_expresion:
-    expresion PUNTO_COMA {}
-  | PUNTO_COMA
+    sentencia_expresion_fact PUNTO_COMA {}
+;
+
+sentencia_expresion_fact:
+    | expresion {}
 ;
 
 sentencia_seleccion:
-    SI PAR_INICIO expresion PAR_FINAL sentencia {}
-  | SI PAR_INICIO expresion PAR_FINAL sentencia SINO sentencia {}
+    SI PAR_INICIO expresion PAR_FINAL sentencia sentencia_seleccion_fact {}
+;
+
+sentencia_seleccion_fact:
+    | SINO sentencia {}
 ;
 
 sentencia_iteracion:
@@ -143,11 +149,11 @@ sentencia_iteracion:
 
 sentencia_retorno:
     RETORNO PUNTO_COMA {}
-  | RETORNO expresion PUNTO_COMA {}
+  | RETORNO expresion PUNTO_COMA {std::cout << "RETORNO PUNTO_COMA" << std::endl; }
 ;
 
 expresion:
-    var ASIGNAR expresion {}
+    var ASIGNAR expresion {std::cout << "ASIGNAR" << std::endl;}
   | expresion_simple {}
 ;
 
