@@ -1,7 +1,11 @@
-# CEs
+# cs3402-lab5
 
 Building instructions:
 
 ```
-TODO
+mkdir build
+cd build
+cmake ..
+make -j5
+ctest
 ```

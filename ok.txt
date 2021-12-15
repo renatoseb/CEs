@@ -1,3 +1,0 @@
-entero b;
-entero a[5];
-sin_tipo a(){}
