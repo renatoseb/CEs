@@ -31,11 +31,11 @@
     int int_val;
 }
 
-%start	input 
+%start	programa 
 
-%token	<int_val>	INTEGER_LITERAL NUMERO
+%token <int_val> NUMERO
 %nterm <int_val> exp term factor
-%token PAR_BEGIN PAR_END IDENTIFICADOR TIPO_ENTERO SIN_TIPO RETORNO MIENTRAS SI SINO MAIN 
+%token IDENTIFICADOR TIPO_ENTERO SIN_TIPO RETORNO MIENTRAS SI SINO MAIN
 %token OP_COMP_DESIGUAL OP_COMP_IGUAL OP_COMP_MENOR OP_COMP_MAYOR OP_COMP_MENOR_IGUAL OP_COMP_MAYOR_IGUAL OP_SUMA OP_RESTA
 %token OP_MUL OP_DIV ASIGNAR COMA PUNTO_COMA PAR_INICIO PAR_FINAL CORCH_INICIO CORCH_FINAL LLAVES_INICIO LLAVES_FINAL ERROR
 
@@ -44,10 +44,9 @@
 
 
 %%
-
+/*
 programa → lista_declaracion
 lista_declaracion → lista_declaracion declaracion | declaracion
-
 */
 
 programa:
@@ -100,8 +99,10 @@ lista_params:
 
 // TODO: Falta arreglar esta parte, la regla tipo se factorizo para que no hayan ambiguedad
 param:
-    tipo IDENTIFICADOR {}
-  | tipo IDENTIFICADOR CORCH_INICIO CORCH_FINAL {}
+      TIPO_ENTERO IDENTIFICADOR {}
+    | SIN_TIPO IDENTIFICADOR {}
+    | TIPO_ENTERO IDENTIFICADOR CORCH_INICIO CORCH_FINAL {}
+    | SIN_TIPO IDENTIFICADOR CORCH_INICIO CORCH_FINAL {}
 ;
 
 sent_compuesta:
@@ -110,13 +111,13 @@ sent_compuesta:
 
 // TODO: Falta arregalr esta parte, la regla var_declaracion se factorizo para que no haya ambiguedad
 declaracion_local:
-    declaracion_local var_declaracion {}
-  | 
+    declaracion_local var_declaracion_fact {}
+  |
 ;
 
 lista_sentencias:
     lista_sentencias sentencia {}
-  | 
+  |
 ;
 
 sentencia:
