@@ -55,7 +55,7 @@ main { return Parser::token::MAIN; }
 [ \t]*		{}
 [\n]		{  yylineno++; }
 
-.		{ std::cout<<"Error\n"; std::cerr << "SCANNER "; /*yyerror("");*/ exit(1);	}
+.		{ std::cout<<"Error\n"; std::cerr << "SCANNER "; /*yyerror("");*/ /*exit(1);*/	}
 
 %%
 

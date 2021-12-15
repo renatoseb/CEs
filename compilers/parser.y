@@ -34,7 +34,7 @@
 %start	programa 
 
 %token <int_val> NUMERO
-%nterm <int_val> exp term factor
+%nterm <int_val> term factor
 %token IDENTIFICADOR TIPO_ENTERO SIN_TIPO RETORNO MIENTRAS SI SINO MAIN
 %token OP_COMP_DESIGUAL OP_COMP_IGUAL OP_COMP_MENOR OP_COMP_MAYOR OP_COMP_MENOR_IGUAL OP_COMP_MAYOR_IGUAL OP_SUMA OP_RESTA
 %token OP_MUL OP_DIV ASIGNAR COMA PUNTO_COMA PAR_INICIO PAR_FINAL CORCH_INICIO CORCH_FINAL LLAVES_INICIO LLAVES_FINAL ERROR
@@ -50,7 +50,7 @@ lista_declaracion → lista_declaracion declaracion | declaracion
 */
 
 programa:
-    lista_declaracion {  }
+    lista_declaracion {  *result = 1; }
 ;
 
 lista_declaracion:
@@ -215,5 +215,5 @@ lista_arg:
 
 void utec::compilers::Parser::error(const std::string& msg) {
     std::cerr << msg << " " /*<< yylineno*/ <<'\n';
-    exit(1);
+    //exit(1);
 }
