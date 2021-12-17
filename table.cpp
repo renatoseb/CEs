@@ -28,14 +28,35 @@ typedef vector<string> parametros;
 unordered_map<string, util> variables;
 unordered_map<string, parametros> functions;
 
+void imprimir_map_util(unordered_map<string, util> m)
+{
+    for (auto x : m)
+    {
+        cout << x.first << endl;
+        cout << "values:" << endl;
+        for (auto y : x.second.values)
+        {
+            cout << y << " ";
+        }
+    }
+}
+
+void imprimir_map_funcs(unordered_map<string, parametros> m)
+{
+    for (auto x : m)
+    {
+        cout << x.first << endl;
+    }
+}
+
 bool existe_variable(string name)
 {
-    return variables.count(name);
+    return variables.count(name) != 0;
 }
 
 bool existe_funcion(string name)
 {
-    return functions.count(name);
+    return functions.count(name) != 0;
 }
 
 bool anhadir_id_var(string name)
@@ -86,6 +107,9 @@ bool modificar_arreglo_en_i(string name, string val, int i)
 
 bool anhadir_id_function(string name, string parameters)
 {
+    std::cout << "name: " << name << "\n";
+    std::cout << "parameters: " << parameters << "\n";
+
     if (!existe_funcion(name))
         return false;
 
@@ -96,5 +120,6 @@ bool anhadir_id_function(string name, string parameters)
         par.push_back(temp);
 
     functions[name] = par;
+    imprimir_map_funcs(functions);
     return true;
 }

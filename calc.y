@@ -16,15 +16,13 @@ extern "C" int yylex();
 %start	programa
 
 %token <op_val> NUMERO
-// %nterm <int_val> term factor expresion_aditiva
-//%type <str> params lista_params param expresion var
-//%type <str> IDENTIFICADOR
+
 %token <op_val> IDENTIFICADOR
 %token <op_val> TIPO_ENTERO
 %token SIN_TIPO RETORNO MIENTRAS SI SINO MAIN
 %token OP_COMP_DIFERENTE OP_COMP_IGUAL OP_COMP_MENOR OP_COMP_MAYOR OP_COMP_MENOR_IGUAL OP_COMP_MAYOR_IGUAL OP_SUMA OP_RESTA
 %token OP_MUL OP_DIV ASIGNAR COMA PUNTO_COMA PAR_INICIO PAR_FINAL CORCH_INICIO CORCH_FINAL LLAVES_INICIO LLAVES_FINAL ERROR
-%type <op_val> expresion var params param lista_params args expresion_simple fun_declaracion var_declaracion
+%type <op_val> expresion var params param lista_params args expresion_simple fun_declaracion var_declaracion p
 %type <op_val> expresion_aditiva relop
 
 %%
@@ -70,8 +68,8 @@ var_declaracion:
 /*
 var_declaracion_fact:
     PUNTO_COMA { 
-        string *var1 = new string(".");
-        $$ = var1; 
+        string var1 = new string(".");
+        $$ = &var1;
       }
   | CORCH_INICIO NUMERO CORCH_FINAL PUNTO_COMA {
       string* t = new string(to_string($2));
@@ -87,13 +85,13 @@ var_declaracion_fact:
 
 fun_declaracion:
     TIPO_ENTERO IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta {
-      std::cout << "." << string(*$4) << "." << std::endl;
       if(!anhadir_id_function(string(*$2), string(*$4))) {
           yyerror("La funcion ya ha sido declarada");
       }
-      std::cout << "string(*$4)" << std::endl;
+      std::cout << "params fun declaracion: " << string(*$4) << std::endl;
     }
   | SIN_TIPO IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta {
+      // string s = string(*$2);
       if(!anhadir_id_function(string(*$2), string(*$4))) {
           yyerror("La funcion ya ha sido declarada");
       }
@@ -106,41 +104,49 @@ fun_declaracion:
   }
   | SIN_TIPO MAIN PAR_INICIO params PAR_FINAL sent_compuesta {
       string s = "main";
-      if(!anhadir_id_function(s, string(*$4))) {
+      if(!anhadir_id_function(s , string(*$4))) {
           yyerror("La funcion ya ha sido declarada");
       }
   }
 ;
 
-params:
-    lista_params {
+params: lista_params {
       /*
       string *var = new string("params");
 
       */
+      std::cout << "lista params in params: " << string(*$1) << std::endl;
       $$ = $1;
-      }
-  | SIN_TIPO {}
-  | { string s=""; $$ = &s; /* se agrego epsilon para representar que una funcion puede no tener parametros*/ }
+    }
+    |   SIN_TIPO {}
+    |   { /*string s=""; $$ = &s; */ /* se agrego epsilon para representar que una funcion puede no tener parametros*/ }
 ;
 
-lista_params:
-    lista_params COMA param {
-      string t = string(*$1) + "," + string(*$3);
+lista_params: lista_params COMA p  {
+      // std::cout << "lista params 2da: " << string(*$1) << std::endl;
+      string t =  string(*$1) + "," + string(*$3);
       $$ = &t;
     }
-  | param { $$ = $1; }
+    | 
+    p {
+      std::cout << "lista params(regla param) 1ra: " << string(*$1) << std::endl;
+      $$ = $1; 
+    }
+;
+
+p:
+  param {$$ = $1;}
 ;
 
 // TODO: Falta añadir verificacion de parametros
-param:
-      TIPO_ENTERO IDENTIFICADOR {
-        string t = string(*$1) + "," + string(*$2);
-        $$ = &t;
-      }
-    | SIN_TIPO IDENTIFICADOR {  }
-    | TIPO_ENTERO IDENTIFICADOR CORCH_INICIO CORCH_FINAL {  }
-    | SIN_TIPO IDENTIFICADOR CORCH_INICIO CORCH_FINAL {  }
+param: TIPO_ENTERO IDENTIFICADOR {
+          // std::cout << "param: " << string(*$2) << std::endl;
+          // string t = string(*$2);
+          $$ = $2;
+       }
+    |   SIN_TIPO IDENTIFICADOR {  }
+    |   TIPO_ENTERO IDENTIFICADOR CORCH_INICIO CORCH_FINAL {  }
+    |   SIN_TIPO IDENTIFICADOR CORCH_INICIO CORCH_FINAL {  }  
 ;
 
 // regla 10

@@ -19,7 +19,7 @@ bison.o:	bison.c
 		$(CC) $(CFLAGS) -c bison.c -o bison.o
 
 bison.c:	calc.y
-		bison -d -v calc.y
+		bison -d -v --report-file=parser.report calc.y
 		cp calc.tab.c bison.c
 		cmp -s calc.tab.h tok.h || cp calc.tab.h tok.h
 
