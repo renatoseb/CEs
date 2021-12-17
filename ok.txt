@@ -1,9 +1,10 @@
-entero main(){
+
+entero main (entero a) {
     entero a;
     entero c;
     entero b;
     a = 1;
-    si(a == 4){
+    si (a == 4) {
         a = 3;
     }
 }

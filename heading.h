@@ -1,6 +1,6 @@
 /* heading.h */
 
-#define YY_NO_UNPUT
+// #define YY_NO_UNPUT
 
 using namespace std;
 

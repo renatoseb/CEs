@@ -2,35 +2,35 @@
 /* calc.y */
 
 %{
-  #include "heading.h"
-  #include "table.cpp"
-  int yyerror(char *s);
-  extern "C" int yylex();
-
+#include "heading.h"
+#include "table.cpp"
+int yyerror(char *s);
+extern "C" int yylex();
 %}
 
 %union{
   int		int_val;
   string*	op_val;
-  string* str;
 }
 
 %start	programa
 
-%token <int_val> NUMERO
-%type <int_val> term factor expresion_aditiva
-%type <str> var_declaracion_fact declaracion_fact params lista_params param expresion var
-%type <str> IDENTIFICADOR
-%token IDENTIFICADOR TIPO_ENTERO SIN_TIPO RETORNO MIENTRAS SI SINO MAIN
-%token OP_COMP_DESIGUAL OP_COMP_IGUAL OP_COMP_MENOR OP_COMP_MAYOR OP_COMP_MENOR_IGUAL OP_COMP_MAYOR_IGUAL OP_SUMA OP_RESTA
+%token <op_val> NUMERO
+// %nterm <int_val> term factor expresion_aditiva
+//%type <str> params lista_params param expresion var
+//%type <str> IDENTIFICADOR
+%token <op_val> IDENTIFICADOR
+%token <op_val> TIPO_ENTERO
+%token SIN_TIPO RETORNO MIENTRAS SI SINO MAIN
+%token OP_COMP_DIFERENTE OP_COMP_IGUAL OP_COMP_MENOR OP_COMP_MAYOR OP_COMP_MENOR_IGUAL OP_COMP_MAYOR_IGUAL OP_SUMA OP_RESTA
 %token OP_MUL OP_DIV ASIGNAR COMA PUNTO_COMA PAR_INICIO PAR_FINAL CORCH_INICIO CORCH_FINAL LLAVES_INICIO LLAVES_FINAL ERROR
+%type <op_val> expresion var params param lista_params args expresion_simple fun_declaracion var_declaracion
+%type <op_val> expresion_aditiva relop
 
 %%
 
-/* GRAMATICA */
-
 programa:
-    lista_declaracion {  yyresult = 1; }
+    lista_declaracion { std::cout << "lista declaracion" << std::endl; }
 ;
 
 lista_declaracion:
@@ -39,36 +39,35 @@ lista_declaracion:
 ;
 
 declaracion:
-    TIPO_ENTERO IDENTIFICADOR declaracion_fact {
-      if (string(*$2)==".") {
-        std::cout << "ok_punto" << std::endl;
-        anhadir_id_var(string(*$2));
-      }
-      if(!anhadir_id_var(string(*$2)))
-      {
-        yyerror("La variable ya ha sido definida");
-      }
-      std::cout << "fun declaracion1 \n"; 
-    
-    }
-      | SIN_TIPO IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta { 
-        if(!anhadir_id_function(string(*$2), string(*$4)))
-        {
-          yyerror("La funcion ya ha sido definida");
-        }
-        std::cout << "fun declaracion2 \n"; 
-      }
+    var_declaracion {}
+  | fun_declaracion {}
 ;
 
+/*
 declaracion_fact:
     var_declaracion_fact { $$ = $1; }
   | PAR_INICIO params PAR_FINAL sent_compuesta { $$ = $2; }
 ;
+*/
 
-// var_declaracion:
-//    TIPO_ENTERO IDENTIFICADOR var_declaracion_fact {}
-//;
+var_declaracion:
+    TIPO_ENTERO IDENTIFICADOR PUNTO_COMA {
+      std::cout << "hola" << std::endl;
+      if(!anhadir_id_var(string(*$2)))
+      {
+        yyerror("La variable ya ha sido definida");
+      }
+    }
+  | TIPO_ENTERO IDENTIFICADOR CORCH_INICIO NUMERO CORCH_FINAL PUNTO_COMA {
+    std::cout << "hola" << std::endl;
+      if(!anhadir_id_arreglo(string(*$2), stoi(string(*$4))))
+      {
+        yyerror("La variable ya ha sido definida");
+      }
+  }
+;
 
+/*
 var_declaracion_fact:
     PUNTO_COMA { 
         string *var1 = new string(".");
@@ -79,52 +78,89 @@ var_declaracion_fact:
       $$ = t;
     }
 ;
+*/
 
 /* tipo:
     TIPO_ENTERO { }
   | SIN_TIPO { }
 ; */
 
-/* fun_declaracion:
-    tipo IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta { std::cout << "fun declaracion in \n"; }
-; */
-
+fun_declaracion:
+    TIPO_ENTERO IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta {
+      std::cout << "." << string(*$4) << "." << std::endl;
+      if(!anhadir_id_function(string(*$2), string(*$4))) {
+          yyerror("La funcion ya ha sido declarada");
+      }
+      std::cout << "string(*$4)" << std::endl;
+    }
+  | SIN_TIPO IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta {
+      if(!anhadir_id_function(string(*$2), string(*$4))) {
+          yyerror("La funcion ya ha sido declarada");
+      }
+  }
+  | TIPO_ENTERO MAIN PAR_INICIO params PAR_FINAL sent_compuesta {
+      string s = "main";
+      if(!anhadir_id_function(s, string(*$4))) {
+          yyerror("La funcion ya ha sido declarada");
+      }
+  }
+  | SIN_TIPO MAIN PAR_INICIO params PAR_FINAL sent_compuesta {
+      string s = "main";
+      if(!anhadir_id_function(s, string(*$4))) {
+          yyerror("La funcion ya ha sido declarada");
+      }
+  }
+;
 
 params:
-    lista_params { 
+    lista_params {
+      /*
       string *var = new string("params");
-      $$ = var; 
+
+      */
+      $$ = $1;
       }
-  | { /* sin tipo cambiado por epsilon para representar que una funcion puede no tener parametros*/ }
+  | SIN_TIPO {}
+  | { string s=""; $$ = &s; /* se agrego epsilon para representar que una funcion puede no tener parametros*/ }
 ;
 
 lista_params:
-    lista_params COMA param { $$ = $1; }
+    lista_params COMA param {
+      string t = string(*$1) + "," + string(*$3);
+      $$ = &t;
+    }
   | param { $$ = $1; }
 ;
 
 // TODO: Falta añadir verificacion de parametros
 param:
-      TIPO_ENTERO IDENTIFICADOR { $$ = $2; }
-    | SIN_TIPO IDENTIFICADOR { $$ = $2; }
-    | TIPO_ENTERO IDENTIFICADOR CORCH_INICIO CORCH_FINAL { $$ = $2; }
-    | SIN_TIPO IDENTIFICADOR CORCH_INICIO CORCH_FINAL { $$ = $2; }
+      TIPO_ENTERO IDENTIFICADOR {
+        string t = string(*$1) + "," + string(*$2);
+        $$ = &t;
+      }
+    | SIN_TIPO IDENTIFICADOR {  }
+    | TIPO_ENTERO IDENTIFICADOR CORCH_INICIO CORCH_FINAL {  }
+    | SIN_TIPO IDENTIFICADOR CORCH_INICIO CORCH_FINAL {  }
 ;
 
+// regla 10
 sent_compuesta:
     LLAVES_INICIO declaracion_local lista_sentencias LLAVES_FINAL {std::cout << "sentencia compuesta" << std::endl;}
 ;
 
+// regla 11
 declaracion_local:
-    declaracion_local TIPO_ENTERO IDENTIFICADOR var_declaracion_fact {std::cout << "declaracion local" << std::endl;}
+    declaracion_local var_declaracion {std::cout << "declaracion local" << std::endl;}
   |
 ;
 
+// regla 12
 lista_sentencias:
     lista_sentencias sentencia {std::cout << "LISTA SENTENCIAS" << std::endl;}
   |
 ;
 
+// regla 13
 sentencia:
     sentencia_expresion {}
   | sentencia_seleccion {}
@@ -132,66 +168,66 @@ sentencia:
   | sentencia_retorno {}
 ;
 
+// regla 14
 sentencia_expresion:
-    sentencia_expresion_fact PUNTO_COMA {}
+    expresion PUNTO_COMA {}
+  | PUNTO_COMA {}
 ;
 
-sentencia_expresion_fact:
-    | expresion {}
-;
-
-// state 105
+// regla 15
 sentencia_seleccion:
-    SI PAR_INICIO expresion PAR_FINAL sentencia sentencia_seleccion_fact {}
+    SI PAR_INICIO expresion PAR_FINAL sentencia SINO sentencia {}
+  | SI PAR_INICIO expresion PAR_FINAL sentencia {}
+  | SI PAR_INICIO expresion PAR_FINAL LLAVES_INICIO sentencia LLAVES_FINAL SINO LLAVES_INICIO sentencia LLAVES_FINAL {}
+  | SI PAR_INICIO expresion PAR_FINAL LLAVES_INICIO sentencia LLAVES_FINAL {}
 ;
 
-sentencia_seleccion_fact:
-    | SINO sentencia {}
-;
-
+// regla 16
 sentencia_iteracion:
     MIENTRAS PAR_INICIO expresion PAR_FINAL LLAVES_INICIO lista_sentencias LLAVES_FINAL {}
 ;
 
+// regla 17
 sentencia_retorno:
     RETORNO PUNTO_COMA {}
   | RETORNO expresion PUNTO_COMA {std::cout << "RETORNO PUNTO_COMA" << std::endl; }
 ;
 
+// regla 18
 expresion:
     var ASIGNAR expresion 
     {
-      if(existe_variable(string(*$1)))
-      {
-        modificar_variable(string(*$1), string(*$3));
-      }
-      std::cout << "ASIGNAR" << std::endl;
+      
     }
   | expresion_simple {}
 ;
 
+// regla 19
 var:
     IDENTIFICADOR {}
   | IDENTIFICADOR CORCH_INICIO expresion CORCH_FINAL {}
 ;
 
+// regla 20
 expresion_simple:
     expresion_aditiva relop expresion_aditiva {}
   | expresion_aditiva {}
 ;
 
+// regla 21
 relop:
     OP_COMP_MENOR  {}
   | OP_COMP_MENOR_IGUAL {}
   | OP_COMP_MAYOR  {}
   | OP_COMP_MAYOR_IGUAL {}
   | OP_COMP_IGUAL {}
-  | OP_COMP_DESIGUAL {}
+  | OP_COMP_DIFERENTE {}
 ;
 
+// regla 22
 expresion_aditiva:
     expresion_aditiva OP_SUMA term {}
-  |  expresion_aditiva OP_RESTA term {}
+  | expresion_aditiva OP_RESTA term {}
   | term {}
 ;
 
@@ -200,6 +236,7 @@ expresion_aditiva:
   | OP_RESTA {}
 ; */
 
+// regla 24
 term:
     term OP_MUL factor {}
   | term OP_DIV factor {}
@@ -211,39 +248,37 @@ term:
   | OP_DIV {}
 ; */
 
+// regla 26
 factor:
     PAR_INICIO expresion PAR_FINAL {
-      $$ = stoi(*$2);
+      
     }
   | var {}
   | call {}
   | NUMERO {
-      $$ = $1;
+    
     }
 ;
 
+// regla 27
 call:
     IDENTIFICADOR PAR_INICIO args PAR_FINAL 
-    {  
-      if(!existe_funcion(string(*$1)))
-      {
-        // char *var1 = new char("La funcion ");
-        // char *var2 = new char(" no ha sido definida anteriomente");
-        // char var3 = *var1 + string(*$1) + var2; 
-        yyerror("La funcion no ha sido definada anteriormente");
-      }
+    {
+      
     }
 ;
 
+// regla 28
 args:
     lista_arg {}
   |
 ;
 
+// regla 29
 lista_arg:
     lista_arg COMA expresion {}
   | expresion {}
-; 
+;
 
 %%
 

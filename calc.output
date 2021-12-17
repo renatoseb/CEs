@@ -1,0 +1,1318 @@
+Terminals unused in grammar
+
+    MAIN
+    ERROR
+
+
+State 106 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: programa $end
+
+    1 programa: lista_declaracion
+
+    2 lista_declaracion: lista_declaracion declaracion
+    3                  | declaracion
+
+    4 declaracion: var_declaracion
+    5            | fun_declaracion
+
+    6 var_declaracion: TIPO_ENTERO IDENTIFICADOR PUNTO_COMA
+    7                | TIPO_ENTERO IDENTIFICADOR CORCH_INICIO NUMERO CORCH_FINAL PUNTO_COMA
+
+    8 fun_declaracion: TIPO_ENTERO IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta
+    9                | SIN_TIPO IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta
+
+   10 params: lista_params
+   11       | SIN_TIPO
+   12       | ε
+
+   13 lista_params: lista_params COMA param
+   14             | param
+
+   15 param: TIPO_ENTERO IDENTIFICADOR
+   16      | SIN_TIPO IDENTIFICADOR
+   17      | TIPO_ENTERO IDENTIFICADOR CORCH_INICIO CORCH_FINAL
+   18      | SIN_TIPO IDENTIFICADOR CORCH_INICIO CORCH_FINAL
+
+   19 sent_compuesta: LLAVES_INICIO declaracion_local lista_sentencias LLAVES_FINAL
+
+   20 declaracion_local: declaracion_local var_declaracion
+   21                  | ε
+
+   22 lista_sentencias: lista_sentencias sentencia
+   23                 | ε
+
+   24 sentencia: sentencia_expresion
+   25          | sentencia_seleccion
+   26          | sentencia_iteracion
+   27          | sentencia_retorno
+
+   28 sentencia_expresion: expresion PUNTO_COMA
+   29                    | PUNTO_COMA
+
+   30 sentencia_seleccion: SI PAR_INICIO expresion PAR_FINAL sentencia
+   31                    | SI PAR_INICIO expresion PAR_FINAL sentencia SINO sentencia
+
+   32 sentencia_iteracion: MIENTRAS PAR_INICIO expresion PAR_FINAL LLAVES_INICIO lista_sentencias LLAVES_FINAL
+
+   33 sentencia_retorno: RETORNO PUNTO_COMA
+   34                  | RETORNO expresion PUNTO_COMA
+
+   35 expresion: var ASIGNAR expresion
+   36          | expresion_simple
+
+   37 var: IDENTIFICADOR
+   38    | IDENTIFICADOR CORCH_INICIO expresion CORCH_FINAL
+
+   39 expresion_simple: expresion_aditiva relop expresion_aditiva
+   40                 | expresion_aditiva
+
+   41 relop: OP_COMP_MENOR
+   42      | OP_COMP_MENOR_IGUAL
+   43      | OP_COMP_MAYOR
+   44      | OP_COMP_MAYOR_IGUAL
+   45      | OP_COMP_IGUAL
+   46      | OP_COMP_DIFERENTE
+
+   47 expresion_aditiva: expresion_aditiva OP_SUMA term
+   48                  | expresion_aditiva OP_RESTA term
+   49                  | term
+
+   50 term: term OP_MUL factor
+   51     | term OP_DIV factor
+   52     | factor
+
+   53 factor: PAR_INICIO expresion PAR_FINAL
+   54       | var
+   55       | call
+   56       | NUMERO
+
+   57 call: IDENTIFICADOR PAR_INICIO args PAR_FINAL
+
+   58 args: lista_arg
+   59     | ε
+
+   60 lista_arg: lista_arg COMA expresion
+   61          | expresion
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256)
+    NUMERO <int_val> (258) 7 56
+    IDENTIFICADOR (259) 6 7 8 9 15 16 17 18 37 38 57
+    TIPO_ENTERO (260) 6 7 8 15 17
+    SIN_TIPO (261) 9 11 16 18
+    RETORNO (262) 33 34
+    MIENTRAS (263) 32
+    SI (264) 30 31
+    SINO (265) 31
+    MAIN (266)
+    OP_COMP_DIFERENTE (267) 46
+    OP_COMP_IGUAL (268) 45
+    OP_COMP_MENOR (269) 41
+    OP_COMP_MAYOR (270) 43
+    OP_COMP_MENOR_IGUAL (271) 42
+    OP_COMP_MAYOR_IGUAL (272) 44
+    OP_SUMA (273) 47
+    OP_RESTA (274) 48
+    OP_MUL (275) 50
+    OP_DIV (276) 51
+    ASIGNAR (277) 35
+    COMA (278) 13 60
+    PUNTO_COMA (279) 6 7 28 29 33 34
+    PAR_INICIO (280) 8 9 30 31 32 53 57
+    PAR_FINAL (281) 8 9 30 31 32 53 57
+    CORCH_INICIO (282) 7 17 18 38
+    CORCH_FINAL (283) 7 17 18 38
+    LLAVES_INICIO (284) 19 32
+    LLAVES_FINAL (285) 19 32
+    ERROR (286)
+
+
+Nonterminals, with rules where they appear
+
+    $accept (32)
+        on left: 0
+    programa (33)
+        on left: 1
+        on right: 0
+    lista_declaracion (34)
+        on left: 2 3
+        on right: 1 2
+    declaracion (35)
+        on left: 4 5
+        on right: 2 3
+    var_declaracion (36)
+        on left: 6 7
+        on right: 4 20
+    fun_declaracion (37)
+        on left: 8 9
+        on right: 5
+    params <op_val> (38)
+        on left: 10 11 12
+        on right: 8 9
+    lista_params <op_val> (39)
+        on left: 13 14
+        on right: 10 13
+    param <op_val> (40)
+        on left: 15 16 17 18
+        on right: 13 14
+    sent_compuesta (41)
+        on left: 19
+        on right: 8 9
+    declaracion_local (42)
+        on left: 20 21
+        on right: 19 20
+    lista_sentencias (43)
+        on left: 22 23
+        on right: 19 22 32
+    sentencia (44)
+        on left: 24 25 26 27
+        on right: 22 30 31
+    sentencia_expresion (45)
+        on left: 28 29
+        on right: 24
+    sentencia_seleccion (46)
+        on left: 30 31
+        on right: 25
+    sentencia_iteracion (47)
+        on left: 32
+        on right: 26
+    sentencia_retorno (48)
+        on left: 33 34
+        on right: 27
+    expresion <op_val> (49)
+        on left: 35 36
+        on right: 28 30 31 32 34 35 38 53 60 61
+    var <op_val> (50)
+        on left: 37 38
+        on right: 35 54
+    expresion_simple <op_val> (51)
+        on left: 39 40
+        on right: 36
+    relop <op_val> (52)
+        on left: 41 42 43 44 45 46
+        on right: 39
+    expresion_aditiva <op_val> (53)
+        on left: 47 48 49
+        on right: 39 40 47 48
+    term (54)
+        on left: 50 51 52
+        on right: 47 48 49 50 51
+    factor (55)
+        on left: 53 54 55 56
+        on right: 50 51 52
+    call (56)
+        on left: 57
+        on right: 55
+    args <op_val> (57)
+        on left: 58 59
+        on right: 57
+    lista_arg (58)
+        on left: 60 61
+        on right: 58 60
+
+
+State 0
+
+    0 $accept: • programa $end
+
+    TIPO_ENTERO  shift, and go to state 1
+    SIN_TIPO     shift, and go to state 2
+
+    programa           go to state 3
+    lista_declaracion  go to state 4
+    declaracion        go to state 5
+    var_declaracion    go to state 6
+    fun_declaracion    go to state 7
+
+
+State 1
+
+    6 var_declaracion: TIPO_ENTERO • IDENTIFICADOR PUNTO_COMA
+    7                | TIPO_ENTERO • IDENTIFICADOR CORCH_INICIO NUMERO CORCH_FINAL PUNTO_COMA
+    8 fun_declaracion: TIPO_ENTERO • IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta
+
+    IDENTIFICADOR  shift, and go to state 8
+
+
+State 2
+
+    9 fun_declaracion: SIN_TIPO • IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta
+
+    IDENTIFICADOR  shift, and go to state 9
+
+
+State 3
+
+    0 $accept: programa • $end
+
+    $end  shift, and go to state 10
+
+
+State 4
+
+    1 programa: lista_declaracion •
+    2 lista_declaracion: lista_declaracion • declaracion
+
+    TIPO_ENTERO  shift, and go to state 1
+    SIN_TIPO     shift, and go to state 2
+
+    $default  reduce using rule 1 (programa)
+
+    declaracion      go to state 11
+    var_declaracion  go to state 6
+    fun_declaracion  go to state 7
+
+
+State 5
+
+    3 lista_declaracion: declaracion •
+
+    $default  reduce using rule 3 (lista_declaracion)
+
+
+State 6
+
+    4 declaracion: var_declaracion •
+
+    $default  reduce using rule 4 (declaracion)
+
+
+State 7
+
+    5 declaracion: fun_declaracion •
+
+    $default  reduce using rule 5 (declaracion)
+
+
+State 8
+
+    6 var_declaracion: TIPO_ENTERO IDENTIFICADOR • PUNTO_COMA
+    7                | TIPO_ENTERO IDENTIFICADOR • CORCH_INICIO NUMERO CORCH_FINAL PUNTO_COMA
+    8 fun_declaracion: TIPO_ENTERO IDENTIFICADOR • PAR_INICIO params PAR_FINAL sent_compuesta
+
+    PUNTO_COMA    shift, and go to state 12
+    PAR_INICIO    shift, and go to state 13
+    CORCH_INICIO  shift, and go to state 14
+
+
+State 9
+
+    9 fun_declaracion: SIN_TIPO IDENTIFICADOR • PAR_INICIO params PAR_FINAL sent_compuesta
+
+    PAR_INICIO  shift, and go to state 15
+
+
+State 10
+
+    0 $accept: programa $end •
+
+    $default  accept
+
+
+State 11
+
+    2 lista_declaracion: lista_declaracion declaracion •
+
+    $default  reduce using rule 2 (lista_declaracion)
+
+
+State 12
+
+    6 var_declaracion: TIPO_ENTERO IDENTIFICADOR PUNTO_COMA •
+
+    $default  reduce using rule 6 (var_declaracion)
+
+
+State 13
+
+    8 fun_declaracion: TIPO_ENTERO IDENTIFICADOR PAR_INICIO • params PAR_FINAL sent_compuesta
+
+    TIPO_ENTERO  shift, and go to state 16
+    SIN_TIPO     shift, and go to state 17
+
+    $default  reduce using rule 12 (params)
+
+    params        go to state 18
+    lista_params  go to state 19
+    param         go to state 20
+
+
+State 14
+
+    7 var_declaracion: TIPO_ENTERO IDENTIFICADOR CORCH_INICIO • NUMERO CORCH_FINAL PUNTO_COMA
+
+    NUMERO  shift, and go to state 21
+
+
+State 15
+
+    9 fun_declaracion: SIN_TIPO IDENTIFICADOR PAR_INICIO • params PAR_FINAL sent_compuesta
+
+    TIPO_ENTERO  shift, and go to state 16
+    SIN_TIPO     shift, and go to state 17
+
+    $default  reduce using rule 12 (params)
+
+    params        go to state 22
+    lista_params  go to state 19
+    param         go to state 20
+
+
+State 16
+
+   15 param: TIPO_ENTERO • IDENTIFICADOR
+   17      | TIPO_ENTERO • IDENTIFICADOR CORCH_INICIO CORCH_FINAL
+
+    IDENTIFICADOR  shift, and go to state 23
+
+
+State 17
+
+   11 params: SIN_TIPO •
+   16 param: SIN_TIPO • IDENTIFICADOR
+   18      | SIN_TIPO • IDENTIFICADOR CORCH_INICIO CORCH_FINAL
+
+    IDENTIFICADOR  shift, and go to state 24
+
+    $default  reduce using rule 11 (params)
+
+
+State 18
+
+    8 fun_declaracion: TIPO_ENTERO IDENTIFICADOR PAR_INICIO params • PAR_FINAL sent_compuesta
+
+    PAR_FINAL  shift, and go to state 25
+
+
+State 19
+
+   10 params: lista_params •
+   13 lista_params: lista_params • COMA param
+
+    COMA  shift, and go to state 26
+
+    $default  reduce using rule 10 (params)
+
+
+State 20
+
+   14 lista_params: param •
+
+    $default  reduce using rule 14 (lista_params)
+
+
+State 21
+
+    7 var_declaracion: TIPO_ENTERO IDENTIFICADOR CORCH_INICIO NUMERO • CORCH_FINAL PUNTO_COMA
+
+    CORCH_FINAL  shift, and go to state 27
+
+
+State 22
+
+    9 fun_declaracion: SIN_TIPO IDENTIFICADOR PAR_INICIO params • PAR_FINAL sent_compuesta
+
+    PAR_FINAL  shift, and go to state 28
+
+
+State 23
+
+   15 param: TIPO_ENTERO IDENTIFICADOR •
+   17      | TIPO_ENTERO IDENTIFICADOR • CORCH_INICIO CORCH_FINAL
+
+    CORCH_INICIO  shift, and go to state 29
+
+    $default  reduce using rule 15 (param)
+
+
+State 24
+
+   16 param: SIN_TIPO IDENTIFICADOR •
+   18      | SIN_TIPO IDENTIFICADOR • CORCH_INICIO CORCH_FINAL
+
+    CORCH_INICIO  shift, and go to state 30
+
+    $default  reduce using rule 16 (param)
+
+
+State 25
+
+    8 fun_declaracion: TIPO_ENTERO IDENTIFICADOR PAR_INICIO params PAR_FINAL • sent_compuesta
+
+    LLAVES_INICIO  shift, and go to state 31
+
+    sent_compuesta  go to state 32
+
+
+State 26
+
+   13 lista_params: lista_params COMA • param
+
+    TIPO_ENTERO  shift, and go to state 16
+    SIN_TIPO     shift, and go to state 33
+
+    param  go to state 34
+
+
+State 27
+
+    7 var_declaracion: TIPO_ENTERO IDENTIFICADOR CORCH_INICIO NUMERO CORCH_FINAL • PUNTO_COMA
+
+    PUNTO_COMA  shift, and go to state 35
+
+
+State 28
+
+    9 fun_declaracion: SIN_TIPO IDENTIFICADOR PAR_INICIO params PAR_FINAL • sent_compuesta
+
+    LLAVES_INICIO  shift, and go to state 31
+
+    sent_compuesta  go to state 36
+
+
+State 29
+
+   17 param: TIPO_ENTERO IDENTIFICADOR CORCH_INICIO • CORCH_FINAL
+
+    CORCH_FINAL  shift, and go to state 37
+
+
+State 30
+
+   18 param: SIN_TIPO IDENTIFICADOR CORCH_INICIO • CORCH_FINAL
+
+    CORCH_FINAL  shift, and go to state 38
+
+
+State 31
+
+   19 sent_compuesta: LLAVES_INICIO • declaracion_local lista_sentencias LLAVES_FINAL
+
+    $default  reduce using rule 21 (declaracion_local)
+
+    declaracion_local  go to state 39
+
+
+State 32
+
+    8 fun_declaracion: TIPO_ENTERO IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta •
+
+    $default  reduce using rule 8 (fun_declaracion)
+
+
+State 33
+
+   16 param: SIN_TIPO • IDENTIFICADOR
+   18      | SIN_TIPO • IDENTIFICADOR CORCH_INICIO CORCH_FINAL
+
+    IDENTIFICADOR  shift, and go to state 24
+
+
+State 34
+
+   13 lista_params: lista_params COMA param •
+
+    $default  reduce using rule 13 (lista_params)
+
+
+State 35
+
+    7 var_declaracion: TIPO_ENTERO IDENTIFICADOR CORCH_INICIO NUMERO CORCH_FINAL PUNTO_COMA •
+
+    $default  reduce using rule 7 (var_declaracion)
+
+
+State 36
+
+    9 fun_declaracion: SIN_TIPO IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta •
+
+    $default  reduce using rule 9 (fun_declaracion)
+
+
+State 37
+
+   17 param: TIPO_ENTERO IDENTIFICADOR CORCH_INICIO CORCH_FINAL •
+
+    $default  reduce using rule 17 (param)
+
+
+State 38
+
+   18 param: SIN_TIPO IDENTIFICADOR CORCH_INICIO CORCH_FINAL •
+
+    $default  reduce using rule 18 (param)
+
+
+State 39
+
+   19 sent_compuesta: LLAVES_INICIO declaracion_local • lista_sentencias LLAVES_FINAL
+   20 declaracion_local: declaracion_local • var_declaracion
+
+    TIPO_ENTERO  shift, and go to state 40
+
+    $default  reduce using rule 23 (lista_sentencias)
+
+    var_declaracion   go to state 41
+    lista_sentencias  go to state 42
+
+
+State 40
+
+    6 var_declaracion: TIPO_ENTERO • IDENTIFICADOR PUNTO_COMA
+    7                | TIPO_ENTERO • IDENTIFICADOR CORCH_INICIO NUMERO CORCH_FINAL PUNTO_COMA
+
+    IDENTIFICADOR  shift, and go to state 43
+
+
+State 41
+
+   20 declaracion_local: declaracion_local var_declaracion •
+
+    $default  reduce using rule 20 (declaracion_local)
+
+
+State 42
+
+   19 sent_compuesta: LLAVES_INICIO declaracion_local lista_sentencias • LLAVES_FINAL
+   22 lista_sentencias: lista_sentencias • sentencia
+
+    NUMERO         shift, and go to state 44
+    IDENTIFICADOR  shift, and go to state 45
+    RETORNO        shift, and go to state 46
+    MIENTRAS       shift, and go to state 47
+    SI             shift, and go to state 48
+    PUNTO_COMA     shift, and go to state 49
+    PAR_INICIO     shift, and go to state 50
+    LLAVES_FINAL   shift, and go to state 51
+
+    sentencia            go to state 52
+    sentencia_expresion  go to state 53
+    sentencia_seleccion  go to state 54
+    sentencia_iteracion  go to state 55
+    sentencia_retorno    go to state 56
+    expresion            go to state 57
+    var                  go to state 58
+    expresion_simple     go to state 59
+    expresion_aditiva    go to state 60
+    term                 go to state 61
+    factor               go to state 62
+    call                 go to state 63
+
+
+State 43
+
+    6 var_declaracion: TIPO_ENTERO IDENTIFICADOR • PUNTO_COMA
+    7                | TIPO_ENTERO IDENTIFICADOR • CORCH_INICIO NUMERO CORCH_FINAL PUNTO_COMA
+
+    PUNTO_COMA    shift, and go to state 12
+    CORCH_INICIO  shift, and go to state 14
+
+
+State 44
+
+   56 factor: NUMERO •
+
+    $default  reduce using rule 56 (factor)
+
+
+State 45
+
+   37 var: IDENTIFICADOR •
+   38    | IDENTIFICADOR • CORCH_INICIO expresion CORCH_FINAL
+   57 call: IDENTIFICADOR • PAR_INICIO args PAR_FINAL
+
+    PAR_INICIO    shift, and go to state 64
+    CORCH_INICIO  shift, and go to state 65
+
+    $default  reduce using rule 37 (var)
+
+
+State 46
+
+   33 sentencia_retorno: RETORNO • PUNTO_COMA
+   34                  | RETORNO • expresion PUNTO_COMA
+
+    NUMERO         shift, and go to state 44
+    IDENTIFICADOR  shift, and go to state 45
+    PUNTO_COMA     shift, and go to state 66
+    PAR_INICIO     shift, and go to state 50
+
+    expresion          go to state 67
+    var                go to state 58
+    expresion_simple   go to state 59
+    expresion_aditiva  go to state 60
+    term               go to state 61
+    factor             go to state 62
+    call               go to state 63
+
+
+State 47
+
+   32 sentencia_iteracion: MIENTRAS • PAR_INICIO expresion PAR_FINAL LLAVES_INICIO lista_sentencias LLAVES_FINAL
+
+    PAR_INICIO  shift, and go to state 68
+
+
+State 48
+
+   30 sentencia_seleccion: SI • PAR_INICIO expresion PAR_FINAL sentencia
+   31                    | SI • PAR_INICIO expresion PAR_FINAL sentencia SINO sentencia
+
+    PAR_INICIO  shift, and go to state 69
+
+
+State 49
+
+   29 sentencia_expresion: PUNTO_COMA •
+
+    $default  reduce using rule 29 (sentencia_expresion)
+
+
+State 50
+
+   53 factor: PAR_INICIO • expresion PAR_FINAL
+
+    NUMERO         shift, and go to state 44
+    IDENTIFICADOR  shift, and go to state 45
+    PAR_INICIO     shift, and go to state 50
+
+    expresion          go to state 70
+    var                go to state 58
+    expresion_simple   go to state 59
+    expresion_aditiva  go to state 60
+    term               go to state 61
+    factor             go to state 62
+    call               go to state 63
+
+
+State 51
+
+   19 sent_compuesta: LLAVES_INICIO declaracion_local lista_sentencias LLAVES_FINAL •
+
+    $default  reduce using rule 19 (sent_compuesta)
+
+
+State 52
+
+   22 lista_sentencias: lista_sentencias sentencia •
+
+    $default  reduce using rule 22 (lista_sentencias)
+
+
+State 53
+
+   24 sentencia: sentencia_expresion •
+
+    $default  reduce using rule 24 (sentencia)
+
+
+State 54
+
+   25 sentencia: sentencia_seleccion •
+
+    $default  reduce using rule 25 (sentencia)
+
+
+State 55
+
+   26 sentencia: sentencia_iteracion •
+
+    $default  reduce using rule 26 (sentencia)
+
+
+State 56
+
+   27 sentencia: sentencia_retorno •
+
+    $default  reduce using rule 27 (sentencia)
+
+
+State 57
+
+   28 sentencia_expresion: expresion • PUNTO_COMA
+
+    PUNTO_COMA  shift, and go to state 71
+
+
+State 58
+
+   35 expresion: var • ASIGNAR expresion
+   54 factor: var •
+
+    ASIGNAR  shift, and go to state 72
+
+    $default  reduce using rule 54 (factor)
+
+
+State 59
+
+   36 expresion: expresion_simple •
+
+    $default  reduce using rule 36 (expresion)
+
+
+State 60
+
+   39 expresion_simple: expresion_aditiva • relop expresion_aditiva
+   40                 | expresion_aditiva •
+   47 expresion_aditiva: expresion_aditiva • OP_SUMA term
+   48                  | expresion_aditiva • OP_RESTA term
+
+    OP_COMP_DIFERENTE    shift, and go to state 73
+    OP_COMP_IGUAL        shift, and go to state 74
+    OP_COMP_MENOR        shift, and go to state 75
+    OP_COMP_MAYOR        shift, and go to state 76
+    OP_COMP_MENOR_IGUAL  shift, and go to state 77
+    OP_COMP_MAYOR_IGUAL  shift, and go to state 78
+    OP_SUMA              shift, and go to state 79
+    OP_RESTA             shift, and go to state 80
+
+    $default  reduce using rule 40 (expresion_simple)
+
+    relop  go to state 81
+
+
+State 61
+
+   49 expresion_aditiva: term •
+   50 term: term • OP_MUL factor
+   51     | term • OP_DIV factor
+
+    OP_MUL  shift, and go to state 82
+    OP_DIV  shift, and go to state 83
+
+    $default  reduce using rule 49 (expresion_aditiva)
+
+
+State 62
+
+   52 term: factor •
+
+    $default  reduce using rule 52 (term)
+
+
+State 63
+
+   55 factor: call •
+
+    $default  reduce using rule 55 (factor)
+
+
+State 64
+
+   57 call: IDENTIFICADOR PAR_INICIO • args PAR_FINAL
+
+    NUMERO         shift, and go to state 44
+    IDENTIFICADOR  shift, and go to state 45
+    PAR_INICIO     shift, and go to state 50
+
+    $default  reduce using rule 59 (args)
+
+    expresion          go to state 84
+    var                go to state 58
+    expresion_simple   go to state 59
+    expresion_aditiva  go to state 60
+    term               go to state 61
+    factor             go to state 62
+    call               go to state 63
+    args               go to state 85
+    lista_arg          go to state 86
+
+
+State 65
+
+   38 var: IDENTIFICADOR CORCH_INICIO • expresion CORCH_FINAL
+
+    NUMERO         shift, and go to state 44
+    IDENTIFICADOR  shift, and go to state 45
+    PAR_INICIO     shift, and go to state 50
+
+    expresion          go to state 87
+    var                go to state 58
+    expresion_simple   go to state 59
+    expresion_aditiva  go to state 60
+    term               go to state 61
+    factor             go to state 62
+    call               go to state 63
+
+
+State 66
+
+   33 sentencia_retorno: RETORNO PUNTO_COMA •
+
+    $default  reduce using rule 33 (sentencia_retorno)
+
+
+State 67
+
+   34 sentencia_retorno: RETORNO expresion • PUNTO_COMA
+
+    PUNTO_COMA  shift, and go to state 88
+
+
+State 68
+
+   32 sentencia_iteracion: MIENTRAS PAR_INICIO • expresion PAR_FINAL LLAVES_INICIO lista_sentencias LLAVES_FINAL
+
+    NUMERO         shift, and go to state 44
+    IDENTIFICADOR  shift, and go to state 45
+    PAR_INICIO     shift, and go to state 50
+
+    expresion          go to state 89
+    var                go to state 58
+    expresion_simple   go to state 59
+    expresion_aditiva  go to state 60
+    term               go to state 61
+    factor             go to state 62
+    call               go to state 63
+
+
+State 69
+
+   30 sentencia_seleccion: SI PAR_INICIO • expresion PAR_FINAL sentencia
+   31                    | SI PAR_INICIO • expresion PAR_FINAL sentencia SINO sentencia
+
+    NUMERO         shift, and go to state 44
+    IDENTIFICADOR  shift, and go to state 45
+    PAR_INICIO     shift, and go to state 50
+
+    expresion          go to state 90
+    var                go to state 58
+    expresion_simple   go to state 59
+    expresion_aditiva  go to state 60
+    term               go to state 61
+    factor             go to state 62
+    call               go to state 63
+
+
+State 70
+
+   53 factor: PAR_INICIO expresion • PAR_FINAL
+
+    PAR_FINAL  shift, and go to state 91
+
+
+State 71
+
+   28 sentencia_expresion: expresion PUNTO_COMA •
+
+    $default  reduce using rule 28 (sentencia_expresion)
+
+
+State 72
+
+   35 expresion: var ASIGNAR • expresion
+
+    NUMERO         shift, and go to state 44
+    IDENTIFICADOR  shift, and go to state 45
+    PAR_INICIO     shift, and go to state 50
+
+    expresion          go to state 92
+    var                go to state 58
+    expresion_simple   go to state 59
+    expresion_aditiva  go to state 60
+    term               go to state 61
+    factor             go to state 62
+    call               go to state 63
+
+
+State 73
+
+   46 relop: OP_COMP_DIFERENTE •
+
+    $default  reduce using rule 46 (relop)
+
+
+State 74
+
+   45 relop: OP_COMP_IGUAL •
+
+    $default  reduce using rule 45 (relop)
+
+
+State 75
+
+   41 relop: OP_COMP_MENOR •
+
+    $default  reduce using rule 41 (relop)
+
+
+State 76
+
+   43 relop: OP_COMP_MAYOR •
+
+    $default  reduce using rule 43 (relop)
+
+
+State 77
+
+   42 relop: OP_COMP_MENOR_IGUAL •
+
+    $default  reduce using rule 42 (relop)
+
+
+State 78
+
+   44 relop: OP_COMP_MAYOR_IGUAL •
+
+    $default  reduce using rule 44 (relop)
+
+
+State 79
+
+   47 expresion_aditiva: expresion_aditiva OP_SUMA • term
+
+    NUMERO         shift, and go to state 44
+    IDENTIFICADOR  shift, and go to state 45
+    PAR_INICIO     shift, and go to state 50
+
+    var     go to state 93
+    term    go to state 94
+    factor  go to state 62
+    call    go to state 63
+
+
+State 80
+
+   48 expresion_aditiva: expresion_aditiva OP_RESTA • term
+
+    NUMERO         shift, and go to state 44
+    IDENTIFICADOR  shift, and go to state 45
+    PAR_INICIO     shift, and go to state 50
+
+    var     go to state 93
+    term    go to state 95
+    factor  go to state 62
+    call    go to state 63
+
+
+State 81
+
+   39 expresion_simple: expresion_aditiva relop • expresion_aditiva
+
+    NUMERO         shift, and go to state 44
+    IDENTIFICADOR  shift, and go to state 45
+    PAR_INICIO     shift, and go to state 50
+
+    var                go to state 93
+    expresion_aditiva  go to state 96
+    term               go to state 61
+    factor             go to state 62
+    call               go to state 63
+
+
+State 82
+
+   50 term: term OP_MUL • factor
+
+    NUMERO         shift, and go to state 44
+    IDENTIFICADOR  shift, and go to state 45
+    PAR_INICIO     shift, and go to state 50
+
+    var     go to state 93
+    factor  go to state 97
+    call    go to state 63
+
+
+State 83
+
+   51 term: term OP_DIV • factor
+
+    NUMERO         shift, and go to state 44
+    IDENTIFICADOR  shift, and go to state 45
+    PAR_INICIO     shift, and go to state 50
+
+    var     go to state 93
+    factor  go to state 98
+    call    go to state 63
+
+
+State 84
+
+   61 lista_arg: expresion •
+
+    $default  reduce using rule 61 (lista_arg)
+
+
+State 85
+
+   57 call: IDENTIFICADOR PAR_INICIO args • PAR_FINAL
+
+    PAR_FINAL  shift, and go to state 99
+
+
+State 86
+
+   58 args: lista_arg •
+   60 lista_arg: lista_arg • COMA expresion
+
+    COMA  shift, and go to state 100
+
+    $default  reduce using rule 58 (args)
+
+
+State 87
+
+   38 var: IDENTIFICADOR CORCH_INICIO expresion • CORCH_FINAL
+
+    CORCH_FINAL  shift, and go to state 101
+
+
+State 88
+
+   34 sentencia_retorno: RETORNO expresion PUNTO_COMA •
+
+    $default  reduce using rule 34 (sentencia_retorno)
+
+
+State 89
+
+   32 sentencia_iteracion: MIENTRAS PAR_INICIO expresion • PAR_FINAL LLAVES_INICIO lista_sentencias LLAVES_FINAL
+
+    PAR_FINAL  shift, and go to state 102
+
+
+State 90
+
+   30 sentencia_seleccion: SI PAR_INICIO expresion • PAR_FINAL sentencia
+   31                    | SI PAR_INICIO expresion • PAR_FINAL sentencia SINO sentencia
+
+    PAR_FINAL  shift, and go to state 103
+
+
+State 91
+
+   53 factor: PAR_INICIO expresion PAR_FINAL •
+
+    $default  reduce using rule 53 (factor)
+
+
+State 92
+
+   35 expresion: var ASIGNAR expresion •
+
+    $default  reduce using rule 35 (expresion)
+
+
+State 93
+
+   54 factor: var •
+
+    $default  reduce using rule 54 (factor)
+
+
+State 94
+
+   47 expresion_aditiva: expresion_aditiva OP_SUMA term •
+   50 term: term • OP_MUL factor
+   51     | term • OP_DIV factor
+
+    OP_MUL  shift, and go to state 82
+    OP_DIV  shift, and go to state 83
+
+    $default  reduce using rule 47 (expresion_aditiva)
+
+
+State 95
+
+   48 expresion_aditiva: expresion_aditiva OP_RESTA term •
+   50 term: term • OP_MUL factor
+   51     | term • OP_DIV factor
+
+    OP_MUL  shift, and go to state 82
+    OP_DIV  shift, and go to state 83
+
+    $default  reduce using rule 48 (expresion_aditiva)
+
+
+State 96
+
+   39 expresion_simple: expresion_aditiva relop expresion_aditiva •
+   47 expresion_aditiva: expresion_aditiva • OP_SUMA term
+   48                  | expresion_aditiva • OP_RESTA term
+
+    OP_SUMA   shift, and go to state 79
+    OP_RESTA  shift, and go to state 80
+
+    $default  reduce using rule 39 (expresion_simple)
+
+
+State 97
+
+   50 term: term OP_MUL factor •
+
+    $default  reduce using rule 50 (term)
+
+
+State 98
+
+   51 term: term OP_DIV factor •
+
+    $default  reduce using rule 51 (term)
+
+
+State 99
+
+   57 call: IDENTIFICADOR PAR_INICIO args PAR_FINAL •
+
+    $default  reduce using rule 57 (call)
+
+
+State 100
+
+   60 lista_arg: lista_arg COMA • expresion
+
+    NUMERO         shift, and go to state 44
+    IDENTIFICADOR  shift, and go to state 45
+    PAR_INICIO     shift, and go to state 50
+
+    expresion          go to state 104
+    var                go to state 58
+    expresion_simple   go to state 59
+    expresion_aditiva  go to state 60
+    term               go to state 61
+    factor             go to state 62
+    call               go to state 63
+
+
+State 101
+
+   38 var: IDENTIFICADOR CORCH_INICIO expresion CORCH_FINAL •
+
+    $default  reduce using rule 38 (var)
+
+
+State 102
+
+   32 sentencia_iteracion: MIENTRAS PAR_INICIO expresion PAR_FINAL • LLAVES_INICIO lista_sentencias LLAVES_FINAL
+
+    LLAVES_INICIO  shift, and go to state 105
+
+
+State 103
+
+   30 sentencia_seleccion: SI PAR_INICIO expresion PAR_FINAL • sentencia
+   31                    | SI PAR_INICIO expresion PAR_FINAL • sentencia SINO sentencia
+
+    NUMERO         shift, and go to state 44
+    IDENTIFICADOR  shift, and go to state 45
+    RETORNO        shift, and go to state 46
+    MIENTRAS       shift, and go to state 47
+    SI             shift, and go to state 48
+    PUNTO_COMA     shift, and go to state 49
+    PAR_INICIO     shift, and go to state 50
+
+    sentencia            go to state 106
+    sentencia_expresion  go to state 53
+    sentencia_seleccion  go to state 54
+    sentencia_iteracion  go to state 55
+    sentencia_retorno    go to state 56
+    expresion            go to state 57
+    var                  go to state 58
+    expresion_simple     go to state 59
+    expresion_aditiva    go to state 60
+    term                 go to state 61
+    factor               go to state 62
+    call                 go to state 63
+
+
+State 104
+
+   60 lista_arg: lista_arg COMA expresion •
+
+    $default  reduce using rule 60 (lista_arg)
+
+
+State 105
+
+   32 sentencia_iteracion: MIENTRAS PAR_INICIO expresion PAR_FINAL LLAVES_INICIO • lista_sentencias LLAVES_FINAL
+
+    $default  reduce using rule 23 (lista_sentencias)
+
+    lista_sentencias  go to state 107
+
+
+State 106
+
+   30 sentencia_seleccion: SI PAR_INICIO expresion PAR_FINAL sentencia •
+   31                    | SI PAR_INICIO expresion PAR_FINAL sentencia • SINO sentencia
+
+    SINO  shift, and go to state 108
+
+    SINO      [reduce using rule 30 (sentencia_seleccion)]
+    $default  reduce using rule 30 (sentencia_seleccion)
+
+
+State 107
+
+   22 lista_sentencias: lista_sentencias • sentencia
+   32 sentencia_iteracion: MIENTRAS PAR_INICIO expresion PAR_FINAL LLAVES_INICIO lista_sentencias • LLAVES_FINAL
+
+    NUMERO         shift, and go to state 44
+    IDENTIFICADOR  shift, and go to state 45
+    RETORNO        shift, and go to state 46
+    MIENTRAS       shift, and go to state 47
+    SI             shift, and go to state 48
+    PUNTO_COMA     shift, and go to state 49
+    PAR_INICIO     shift, and go to state 50
+    LLAVES_FINAL   shift, and go to state 109
+
+    sentencia            go to state 52
+    sentencia_expresion  go to state 53
+    sentencia_seleccion  go to state 54
+    sentencia_iteracion  go to state 55
+    sentencia_retorno    go to state 56
+    expresion            go to state 57
+    var                  go to state 58
+    expresion_simple     go to state 59
+    expresion_aditiva    go to state 60
+    term                 go to state 61
+    factor               go to state 62
+    call                 go to state 63
+
+
+State 108
+
+   31 sentencia_seleccion: SI PAR_INICIO expresion PAR_FINAL sentencia SINO • sentencia
+
+    NUMERO         shift, and go to state 44
+    IDENTIFICADOR  shift, and go to state 45
+    RETORNO        shift, and go to state 46
+    MIENTRAS       shift, and go to state 47
+    SI             shift, and go to state 48
+    PUNTO_COMA     shift, and go to state 49
+    PAR_INICIO     shift, and go to state 50
+
+    sentencia            go to state 110
+    sentencia_expresion  go to state 53
+    sentencia_seleccion  go to state 54
+    sentencia_iteracion  go to state 55
+    sentencia_retorno    go to state 56
+    expresion            go to state 57
+    var                  go to state 58
+    expresion_simple     go to state 59
+    expresion_aditiva    go to state 60
+    term                 go to state 61
+    factor               go to state 62
+    call                 go to state 63
+
+
+State 109
+
+   32 sentencia_iteracion: MIENTRAS PAR_INICIO expresion PAR_FINAL LLAVES_INICIO lista_sentencias LLAVES_FINAL •
+
+    $default  reduce using rule 32 (sentencia_iteracion)
+
+
+State 110
+
+   31 sentencia_seleccion: SI PAR_INICIO expresion PAR_FINAL sentencia SINO sentencia •
+
+    $default  reduce using rule 31 (sentencia_seleccion)
