@@ -10,6 +10,7 @@ struct util
 {
     vector<string> values;
     int tam;
+    int line;
 
     util()
     {
@@ -46,17 +47,22 @@ void imprimir_map_funcs(unordered_map<string, parametros> m)
     for (auto x : m)
     {
         cout << x.first << endl;
+        cout << "PARAMETERS: ";
+        for (auto y : x.second) {
+            cout << y << " ";
+        }
+        cout << endl;
     }
 }
 
 bool existe_variable(string name)
 {
-    return variables.count(name) != 0;
+    return variables.count(name);
 }
 
 bool existe_funcion(string name)
 {
-    return functions.count(name) != 0;
+    return functions.count(name);
 }
 
 bool anhadir_id_var(string name)
@@ -110,8 +116,8 @@ bool anhadir_id_function(string name, string parameters)
     std::cout << "name: " << name << "\n";
     std::cout << "parameters: " << parameters << "\n";
 
-    if (!existe_funcion(name))
-        return false;
+    if (existe_funcion(name))
+        return false;   // la funcion ya existe
 
     vector<string> par;
     stringstream streamParameters(parameters);

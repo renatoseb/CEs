@@ -28,12 +28,12 @@ extern "C" int yylex();
 %%
 
 programa:
-    lista_declaracion { std::cout << "lista declaracion" << std::endl; }
+    lista_declaracion { /* std::cout << "lista declaracion" << std::endl; */ }
 ;
 
 lista_declaracion:
-    lista_declaracion declaracion { std::cout << "Derivando a lista_declaracion declaracion \n" ; }
-  | declaracion { std::cout << "Derivando a declaracion \n "; }
+    lista_declaracion declaracion { /* std::cout << "Derivando a lista_declaracion declaracion \n"; */ }
+  | declaracion { /* std::cout << "Derivando a declaracion \n "; */ }
 ;
 
 declaracion:
@@ -50,17 +50,27 @@ declaracion_fact:
 
 var_declaracion:
     TIPO_ENTERO IDENTIFICADOR PUNTO_COMA {
-      std::cout << "hola" << std::endl;
+      // std::cout << "hola" << std::endl;
       if(!anhadir_id_var(string(*$2)))
       {
-        yyerror("La variable ya ha sido definida");
+        char* a = "La variable \"";
+        char* b = "\" ya ha sido definida";
+        char buffer[100];
+        strcat(strcpy(buffer, a), string(*$2).c_str());
+        strcat(buffer, b);
+        yyerror(buffer);
       }
     }
   | TIPO_ENTERO IDENTIFICADOR CORCH_INICIO NUMERO CORCH_FINAL PUNTO_COMA {
-    std::cout << "hola" << std::endl;
+      // std::cout << "hola" << std::endl;
       if(!anhadir_id_arreglo(string(*$2), stoi(string(*$4))))
       {
-        yyerror("La variable ya ha sido definida");
+        char* a = "La variable \"";
+        char* b = "\" ya ha sido definida";
+        char buffer[100];
+        strcat(strcpy(buffer, a), string(*$2).c_str());
+        strcat(buffer, b);
+        yyerror(buffer);
       }
   }
 ;
@@ -88,7 +98,7 @@ fun_declaracion:
       if(!anhadir_id_function(string(*$2), string(*$4))) {
           yyerror("La funcion ya ha sido declarada");
       }
-      std::cout << "params fun declaracion: " << string(*$4) << std::endl;
+      //std::cout << "params fun declaracion: " << string(*$4) << std::endl;
     }
   | SIN_TIPO IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta {
       // string s = string(*$2);
@@ -110,16 +120,20 @@ fun_declaracion:
   }
 ;
 
-params: lista_params {
+params:
+    lista_params {
       /*
       string *var = new string("params");
-
       */
-      std::cout << "lista params in params: " << string(*$1) << std::endl;
+      // std::cout << "lista params in params: " << string(*$1) << std::endl;
       $$ = $1;
     }
-    |   SIN_TIPO {}
-    |   { /*string s=""; $$ = &s; */ /* se agrego epsilon para representar que una funcion puede no tener parametros*/ }
+  |  SIN_TIPO {
+    yyerror("Variable sin tipo declarada");
+  }
+  | {
+      string s=""; $$ = &s; /* se agrego epsilon para representar que una funcion puede no tener parametros*/
+    }
 ;
 
 lista_params: lista_params COMA p  {
@@ -129,7 +143,7 @@ lista_params: lista_params COMA p  {
     }
     | 
     p {
-      std::cout << "lista params(regla param) 1ra: " << string(*$1) << std::endl;
+      // std::cout << "lista params(regla param) 1ra: " << string(*$1) << std::endl;
       $$ = $1; 
     }
 ;
@@ -141,7 +155,6 @@ p:
 // TODO: Falta añadir verificacion de parametros
 param: TIPO_ENTERO IDENTIFICADOR {
           // std::cout << "param: " << string(*$2) << std::endl;
-          // string t = string(*$2);
           $$ = $2;
        }
     |   SIN_TIPO IDENTIFICADOR {  }
@@ -182,10 +195,8 @@ sentencia_expresion:
 
 // regla 15
 sentencia_seleccion:
-    SI PAR_INICIO expresion PAR_FINAL sentencia SINO sentencia {}
-  | SI PAR_INICIO expresion PAR_FINAL sentencia {}
-  | SI PAR_INICIO expresion PAR_FINAL LLAVES_INICIO sentencia LLAVES_FINAL SINO LLAVES_INICIO sentencia LLAVES_FINAL {}
-  | SI PAR_INICIO expresion PAR_FINAL LLAVES_INICIO sentencia LLAVES_FINAL {}
+    SI PAR_INICIO expresion PAR_FINAL LLAVES_INICIO lista_sentencias LLAVES_FINAL SINO LLAVES_INICIO sentencia LLAVES_FINAL {}
+  | SI PAR_INICIO expresion PAR_FINAL LLAVES_INICIO lista_sentencias LLAVES_FINAL {}
 ;
 
 // regla 16
@@ -293,8 +304,8 @@ int yyerror(string s)
   extern int yylineno;	// defined and maintained in lex.c
   extern char *yytext;	// defined and maintained in lex.c
   
-  cerr << "ERROR: " << s << " at symbol \"" << yytext;
-  cerr << "\" on line " << yylineno << endl;
+  cerr << "ERROR: " << s;
+  cerr << " en la linea " << yylineno << endl;
   exit(1);
 }
 

@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.5.1.  */
+/* A Bison parser, made by GNU Bison 3.8.2.  */
 
 /* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
    Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -31,8 +31,9 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-/* Undocumented macros, especially those whose name start with YY_,
-   are private implementation details.  Do not rely on them.  */
+/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
+   especially those whose name start with YY_ or yy_.  They are
+   private implementation details that can be changed or removed.  */
 
 #ifndef YY_YY_CALC_TAB_H_INCLUDED
 # define YY_YY_CALC_TAB_H_INCLUDED
@@ -44,41 +45,46 @@
 extern int yydebug;
 #endif
 
-/* Token type.  */
+/* Token kinds.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
   enum yytokentype
   {
-    NUMERO = 258,
-    IDENTIFICADOR = 259,
-    TIPO_ENTERO = 260,
-    SIN_TIPO = 261,
-    RETORNO = 262,
-    MIENTRAS = 263,
-    SI = 264,
-    SINO = 265,
-    MAIN = 266,
-    OP_COMP_DIFERENTE = 267,
-    OP_COMP_IGUAL = 268,
-    OP_COMP_MENOR = 269,
-    OP_COMP_MAYOR = 270,
-    OP_COMP_MENOR_IGUAL = 271,
-    OP_COMP_MAYOR_IGUAL = 272,
-    OP_SUMA = 273,
-    OP_RESTA = 274,
-    OP_MUL = 275,
-    OP_DIV = 276,
-    ASIGNAR = 277,
-    COMA = 278,
-    PUNTO_COMA = 279,
-    PAR_INICIO = 280,
-    PAR_FINAL = 281,
-    CORCH_INICIO = 282,
-    CORCH_FINAL = 283,
-    LLAVES_INICIO = 284,
-    LLAVES_FINAL = 285,
-    ERROR = 286
+    YYEMPTY = -2,
+    YYEOF = 0,                     /* "end of file"  */
+    YYerror = 256,                 /* error  */
+    YYUNDEF = 257,                 /* "invalid token"  */
+    NUMERO = 258,                  /* NUMERO  */
+    IDENTIFICADOR = 259,           /* IDENTIFICADOR  */
+    TIPO_ENTERO = 260,             /* TIPO_ENTERO  */
+    SIN_TIPO = 261,                /* SIN_TIPO  */
+    RETORNO = 262,                 /* RETORNO  */
+    MIENTRAS = 263,                /* MIENTRAS  */
+    SI = 264,                      /* SI  */
+    SINO = 265,                    /* SINO  */
+    MAIN = 266,                    /* MAIN  */
+    OP_COMP_DIFERENTE = 267,       /* OP_COMP_DIFERENTE  */
+    OP_COMP_IGUAL = 268,           /* OP_COMP_IGUAL  */
+    OP_COMP_MENOR = 269,           /* OP_COMP_MENOR  */
+    OP_COMP_MAYOR = 270,           /* OP_COMP_MAYOR  */
+    OP_COMP_MENOR_IGUAL = 271,     /* OP_COMP_MENOR_IGUAL  */
+    OP_COMP_MAYOR_IGUAL = 272,     /* OP_COMP_MAYOR_IGUAL  */
+    OP_SUMA = 273,                 /* OP_SUMA  */
+    OP_RESTA = 274,                /* OP_RESTA  */
+    OP_MUL = 275,                  /* OP_MUL  */
+    OP_DIV = 276,                  /* OP_DIV  */
+    ASIGNAR = 277,                 /* ASIGNAR  */
+    COMA = 278,                    /* COMA  */
+    PUNTO_COMA = 279,              /* PUNTO_COMA  */
+    PAR_INICIO = 280,              /* PAR_INICIO  */
+    PAR_FINAL = 281,               /* PAR_FINAL  */
+    CORCH_INICIO = 282,            /* CORCH_INICIO  */
+    CORCH_FINAL = 283,             /* CORCH_FINAL  */
+    LLAVES_INICIO = 284,           /* LLAVES_INICIO  */
+    LLAVES_FINAL = 285,            /* LLAVES_FINAL  */
+    ERROR = 286                    /* ERROR  */
   };
+  typedef enum yytokentype yytoken_kind_t;
 #endif
 
 /* Value type.  */
@@ -90,7 +96,7 @@ union YYSTYPE
   int		int_val;
   string*	op_val;
 
-#line 94 "calc.tab.h"
+#line 100 "calc.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -101,6 +107,8 @@ typedef union YYSTYPE YYSTYPE;
 
 extern YYSTYPE yylval;
 
+
 int yyparse (void);
+
 
 #endif /* !YY_YY_CALC_TAB_H_INCLUDED  */

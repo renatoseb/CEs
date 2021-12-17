@@ -1,10 +1,32 @@
+entero foo() {
+    retorno 2;
+}
 
-entero main (entero a) {
+entero main (entero m, entero n) {
     entero a;
-    entero c;
+    entero c[5];
     entero b;
+    /*entero a;*/
+
+    c[1] = 2;
+    c[6] = 4;
     a = 1;
+
     si (a == 4) {
         a = 3;
+    } sino {
+        a = 4;
     }
+
+    mientras (1 == 1) {
+        a = 4;
+        si (1 == 1) {
+            a = 3;
+            b = 2;
+        } sino {
+            a = 4;
+        }
+    }
+
+    retorno 0;
 }
