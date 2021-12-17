@@ -28,12 +28,12 @@ extern "C" int yylex();
 %%
 
 programa:
-    lista_declaracion { /* std::cout << "lista declaracion" << std::endl; */ }
+    lista_declaracion {  }
 ;
 
 lista_declaracion:
-    lista_declaracion declaracion { /* std::cout << "Derivando a lista_declaracion declaracion \n"; */ }
-  | declaracion { /* std::cout << "Derivando a declaracion \n "; */ }
+    lista_declaracion declaracion {  }
+  | declaracion {  }
 ;
 
 declaracion:
@@ -41,67 +41,48 @@ declaracion:
   | fun_declaracion {}
 ;
 
-/*
-declaracion_fact:
-    var_declaracion_fact { $$ = $1; }
-  | PAR_INICIO params PAR_FINAL sent_compuesta { $$ = $2; }
-;
-*/
-
 var_declaracion:
     TIPO_ENTERO IDENTIFICADOR PUNTO_COMA {
-      // std::cout << "hola" << std::endl;
-      if(!anhadir_id_var(string(*$2)))
+      extern int yylineno;
+      int error_line;
+      if(!anhadir_id_var(string(*$2), yylineno, error_line))
       {
         char* a = "La variable \"";
-        char* b = "\" ya ha sido definida";
+        char* b = "\" ya ha sido definida en la linea ";
+        string cc = to_string(error_line);
+        char* c = (char*)cc.c_str();
         char buffer[100];
         strcat(strcpy(buffer, a), string(*$2).c_str());
         strcat(buffer, b);
+        strcat(buffer, c);
         yyerror(buffer);
       }
     }
   | TIPO_ENTERO IDENTIFICADOR CORCH_INICIO NUMERO CORCH_FINAL PUNTO_COMA {
-      // std::cout << "hola" << std::endl;
-      if(!anhadir_id_arreglo(string(*$2), stoi(string(*$4))))
+      extern int yylineno;
+      int error_line;
+      if(!anhadir_id_arreglo(string(*$2), stoi(string(*$4)), yylineno, error_line))
       {
         char* a = "La variable \"";
-        char* b = "\" ya ha sido definida";
+        char* b = "\" ya ha sido definida en la linea ";
+        string cc = to_string(error_line);
+        char* c = (char*)cc.c_str();
         char buffer[100];
         strcat(strcpy(buffer, a), string(*$2).c_str());
         strcat(buffer, b);
+        strcat(buffer, c);
         yyerror(buffer);
       }
   }
 ;
-
-/*
-var_declaracion_fact:
-    PUNTO_COMA { 
-        string var1 = new string(".");
-        $$ = &var1;
-      }
-  | CORCH_INICIO NUMERO CORCH_FINAL PUNTO_COMA {
-      string* t = new string(to_string($2));
-      $$ = t;
-    }
-;
-*/
-
-/* tipo:
-    TIPO_ENTERO { }
-  | SIN_TIPO { }
-; */
 
 fun_declaracion:
     TIPO_ENTERO IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta {
       if(!anhadir_id_function(string(*$2), string(*$4))) {
           yyerror("La funcion ya ha sido declarada");
       }
-      //std::cout << "params fun declaracion: " << string(*$4) << std::endl;
     }
   | SIN_TIPO IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta {
-      // string s = string(*$2);
       if(!anhadir_id_function(string(*$2), string(*$4))) {
           yyerror("La funcion ya ha sido declarada");
       }
@@ -122,10 +103,6 @@ fun_declaracion:
 
 params:
     lista_params {
-      /*
-      string *var = new string("params");
-      */
-      // std::cout << "lista params in params: " << string(*$1) << std::endl;
       $$ = $1;
     }
   |  SIN_TIPO {
@@ -137,13 +114,11 @@ params:
 ;
 
 lista_params: lista_params COMA p  {
-      // std::cout << "lista params 2da: " << string(*$1) << std::endl;
       string t =  string(*$1) + "," + string(*$3);
       $$ = &t;
     }
     | 
     p {
-      // std::cout << "lista params(regla param) 1ra: " << string(*$1) << std::endl;
       $$ = $1; 
     }
 ;
@@ -153,29 +128,35 @@ p:
 ;
 
 // TODO: Falta añadir verificacion de parametros
-param: TIPO_ENTERO IDENTIFICADOR {
-          // std::cout << "param: " << string(*$2) << std::endl;
-          $$ = $2;
-       }
-    |   SIN_TIPO IDENTIFICADOR {  }
-    |   TIPO_ENTERO IDENTIFICADOR CORCH_INICIO CORCH_FINAL {  }
-    |   SIN_TIPO IDENTIFICADOR CORCH_INICIO CORCH_FINAL {  }  
+param:
+    TIPO_ENTERO IDENTIFICADOR {
+     $$ = $2;
+    }
+  | SIN_TIPO IDENTIFICADOR { 
+     $$ = $2;
+  }
+  | TIPO_ENTERO IDENTIFICADOR CORCH_INICIO CORCH_FINAL { 
+     $$ = $2;
+  }
+  | SIN_TIPO IDENTIFICADOR CORCH_INICIO CORCH_FINAL { 
+     
+  }  
 ;
 
 // regla 10
 sent_compuesta:
-    LLAVES_INICIO declaracion_local lista_sentencias LLAVES_FINAL {std::cout << "sentencia compuesta" << std::endl;}
+    LLAVES_INICIO declaracion_local lista_sentencias LLAVES_FINAL {}
 ;
 
 // regla 11
 declaracion_local:
-    declaracion_local var_declaracion {std::cout << "declaracion local" << std::endl;}
+    declaracion_local var_declaracion {}
   |
 ;
 
 // regla 12
 lista_sentencias:
-    lista_sentencias sentencia {std::cout << "LISTA SENTENCIAS" << std::endl;}
+    lista_sentencias sentencia {}
   |
 ;
 
@@ -207,21 +188,28 @@ sentencia_iteracion:
 // regla 17
 sentencia_retorno:
     RETORNO PUNTO_COMA {}
-  | RETORNO expresion PUNTO_COMA {std::cout << "RETORNO PUNTO_COMA" << std::endl; }
+  | RETORNO expresion PUNTO_COMA {  }
 ;
 
 // regla 18
 expresion:
     var ASIGNAR expresion 
     {
-      
+      if (!existe_variable(string(*$1))) {
+        char* a = "La variable \"";
+        char* b = "\" no ha sido declarada";
+        char buffer[100];
+        strcat(strcpy(buffer, a), string(*$1).c_str());
+        strcat(buffer, b);
+        yyerror(buffer);
+      }
     }
   | expresion_simple {}
 ;
 
 // regla 19
 var:
-    IDENTIFICADOR {}
+    IDENTIFICADOR { $$ = $1; }
   | IDENTIFICADOR CORCH_INICIO expresion CORCH_FINAL {}
 ;
 
@@ -248,22 +236,12 @@ expresion_aditiva:
   | term {}
 ;
 
-/* addop:
-    OP_SUMA {}
-  | OP_RESTA {}
-; */
-
 // regla 24
 term:
     term OP_MUL factor {}
   | term OP_DIV factor {}
   | factor {}
 ;
-
-/* mulop:
-    OP_MUL {}
-  | OP_DIV {}
-; */
 
 // regla 26
 factor:
@@ -304,9 +282,8 @@ int yyerror(string s)
   extern int yylineno;	// defined and maintained in lex.c
   extern char *yytext;	// defined and maintained in lex.c
   
-  cerr << "ERROR: " << s;
-  cerr << " en la linea " << yylineno << endl;
-  exit(1);
+  cerr << "[ERROR LINEA " << yylineno << "]: "<< s << endl;
+  //exit(1);
 }
 
 int yyerror(char *s)

@@ -6,7 +6,8 @@ entero main (entero m, entero n) {
     entero a;
     entero c[5];
     entero b;
-    /*entero a;*/
+    entero a;
+    entero b;
 
     c[1] = 2;
     c[6] = 4;
@@ -17,6 +18,12 @@ entero main (entero m, entero n) {
     } sino {
         a = 4;
     }
+
+    si (1 == 1) {
+        a = 1;
+    }
+
+    t = 1;
 
     mientras (1 == 1) {
         a = 4;

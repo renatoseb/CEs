@@ -550,13 +550,13 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    31,    31,    35,    36,    40,    41,    52,    64,    97,
-     103,   109,   115,   124,   131,   134,   139,   145,   152,   156,
-     160,   161,   162,   167,   172,   173,   178,   179,   184,   185,
-     186,   187,   192,   193,   198,   199,   204,   209,   210,   215,
-     219,   224,   225,   230,   231,   236,   237,   238,   239,   240,
-     241,   246,   247,   248,   258,   259,   260,   270,   273,   274,
-     275,   282,   290,   291,   296,   297
+       0,    31,    31,    35,    36,    40,    41,    45,    61,    80,
+      85,    90,    96,   105,   108,   111,   116,   121,   127,   132,
+     135,   138,   141,   148,   153,   154,   159,   160,   165,   166,
+     167,   168,   173,   174,   179,   180,   185,   190,   191,   196,
+     207,   212,   213,   218,   219,   224,   225,   226,   227,   228,
+     229,   234,   235,   236,   241,   242,   243,   248,   251,   252,
+     253,   260,   268,   269,   274,   275
 };
 #endif
 
@@ -1205,19 +1205,19 @@ yyreduce:
     {
   case 2: /* programa: lista_declaracion  */
 #line 31 "calc.y"
-                      { /* std::cout << "lista declaracion" << std::endl; */ }
+                      {  }
 #line 1210 "calc.tab.c"
     break;
 
   case 3: /* lista_declaracion: lista_declaracion declaracion  */
 #line 35 "calc.y"
-                                  { /* std::cout << "Derivando a lista_declaracion declaracion \n"; */ }
+                                  {  }
 #line 1216 "calc.tab.c"
     break;
 
   case 4: /* lista_declaracion: declaracion  */
 #line 36 "calc.y"
-                { /* std::cout << "Derivando a declaracion \n "; */ }
+                {  }
 #line 1222 "calc.tab.c"
     break;
 
@@ -1234,413 +1234,425 @@ yyreduce:
     break;
 
   case 7: /* var_declaracion: TIPO_ENTERO IDENTIFICADOR PUNTO_COMA  */
-#line 52 "calc.y"
+#line 45 "calc.y"
                                          {
-      // std::cout << "hola" << std::endl;
-      if(!anhadir_id_var(string(*(yyvsp[-1].op_val))))
+      extern int yylineno;
+      int error_line;
+      if(!anhadir_id_var(string(*(yyvsp[-1].op_val)), yylineno, error_line))
       {
         char* a = "La variable \"";
-        char* b = "\" ya ha sido definida";
+        char* b = "\" ya ha sido definida en la linea ";
+        string cc = to_string(error_line);
+        char* c = (char*)cc.c_str();
         char buffer[100];
         strcat(strcpy(buffer, a), string(*(yyvsp[-1].op_val)).c_str());
         strcat(buffer, b);
+        strcat(buffer, c);
         yyerror(buffer);
       }
     }
-#line 1251 "calc.tab.c"
+#line 1255 "calc.tab.c"
     break;
 
   case 8: /* var_declaracion: TIPO_ENTERO IDENTIFICADOR CORCH_INICIO NUMERO CORCH_FINAL PUNTO_COMA  */
-#line 64 "calc.y"
+#line 61 "calc.y"
                                                                          {
-      // std::cout << "hola" << std::endl;
-      if(!anhadir_id_arreglo(string(*(yyvsp[-4].op_val)), stoi(string(*(yyvsp[-2].op_val)))))
+      extern int yylineno;
+      int error_line;
+      if(!anhadir_id_arreglo(string(*(yyvsp[-4].op_val)), stoi(string(*(yyvsp[-2].op_val))), yylineno, error_line))
       {
         char* a = "La variable \"";
-        char* b = "\" ya ha sido definida";
+        char* b = "\" ya ha sido definida en la linea ";
+        string cc = to_string(error_line);
+        char* c = (char*)cc.c_str();
         char buffer[100];
         strcat(strcpy(buffer, a), string(*(yyvsp[-4].op_val)).c_str());
         strcat(buffer, b);
+        strcat(buffer, c);
         yyerror(buffer);
       }
   }
-#line 1268 "calc.tab.c"
+#line 1276 "calc.tab.c"
     break;
 
   case 9: /* fun_declaracion: TIPO_ENTERO IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta  */
-#line 97 "calc.y"
+#line 80 "calc.y"
                                                                          {
       if(!anhadir_id_function(string(*(yyvsp[-4].op_val)), string(*(yyvsp[-2].op_val)))) {
           yyerror("La funcion ya ha sido declarada");
       }
-      //std::cout << "params fun declaracion: " << string(*$4) << std::endl;
     }
-#line 1279 "calc.tab.c"
+#line 1286 "calc.tab.c"
     break;
 
   case 10: /* fun_declaracion: SIN_TIPO IDENTIFICADOR PAR_INICIO params PAR_FINAL sent_compuesta  */
-#line 103 "calc.y"
+#line 85 "calc.y"
                                                                       {
-      // string s = string(*$2);
       if(!anhadir_id_function(string(*(yyvsp[-4].op_val)), string(*(yyvsp[-2].op_val)))) {
           yyerror("La funcion ya ha sido declarada");
       }
   }
-#line 1290 "calc.tab.c"
+#line 1296 "calc.tab.c"
     break;
 
   case 11: /* fun_declaracion: TIPO_ENTERO MAIN PAR_INICIO params PAR_FINAL sent_compuesta  */
-#line 109 "calc.y"
+#line 90 "calc.y"
                                                                 {
       string s = "main";
       if(!anhadir_id_function(s, string(*(yyvsp[-2].op_val)))) {
           yyerror("La funcion ya ha sido declarada");
       }
   }
-#line 1301 "calc.tab.c"
+#line 1307 "calc.tab.c"
     break;
 
   case 12: /* fun_declaracion: SIN_TIPO MAIN PAR_INICIO params PAR_FINAL sent_compuesta  */
-#line 115 "calc.y"
+#line 96 "calc.y"
                                                              {
       string s = "main";
       if(!anhadir_id_function(s , string(*(yyvsp[-2].op_val)))) {
           yyerror("La funcion ya ha sido declarada");
       }
   }
-#line 1312 "calc.tab.c"
+#line 1318 "calc.tab.c"
     break;
 
   case 13: /* params: lista_params  */
-#line 124 "calc.y"
+#line 105 "calc.y"
                  {
-      /*
-      string *var = new string("params");
-      */
-      // std::cout << "lista params in params: " << string(*$1) << std::endl;
       (yyval.op_val) = (yyvsp[0].op_val);
     }
-#line 1324 "calc.tab.c"
+#line 1326 "calc.tab.c"
     break;
 
   case 14: /* params: SIN_TIPO  */
-#line 131 "calc.y"
+#line 108 "calc.y"
               {
     yyerror("Variable sin tipo declarada");
   }
-#line 1332 "calc.tab.c"
+#line 1334 "calc.tab.c"
     break;
 
   case 15: /* params: %empty  */
-#line 134 "calc.y"
+#line 111 "calc.y"
     {
       string s=""; (yyval.op_val) = &s; /* se agrego epsilon para representar que una funcion puede no tener parametros*/
     }
-#line 1340 "calc.tab.c"
+#line 1342 "calc.tab.c"
     break;
 
   case 16: /* lista_params: lista_params COMA p  */
-#line 139 "calc.y"
+#line 116 "calc.y"
                                    {
-      // std::cout << "lista params 2da: " << string(*$1) << std::endl;
       string t =  string(*(yyvsp[-2].op_val)) + "," + string(*(yyvsp[0].op_val));
       (yyval.op_val) = &t;
     }
-#line 1350 "calc.tab.c"
+#line 1351 "calc.tab.c"
     break;
 
   case 17: /* lista_params: p  */
-#line 145 "calc.y"
+#line 121 "calc.y"
       {
-      // std::cout << "lista params(regla param) 1ra: " << string(*$1) << std::endl;
       (yyval.op_val) = (yyvsp[0].op_val); 
     }
 #line 1359 "calc.tab.c"
     break;
 
   case 18: /* p: param  */
-#line 152 "calc.y"
+#line 127 "calc.y"
         {(yyval.op_val) = (yyvsp[0].op_val);}
 #line 1365 "calc.tab.c"
     break;
 
   case 19: /* param: TIPO_ENTERO IDENTIFICADOR  */
-#line 156 "calc.y"
-                                 {
-          // std::cout << "param: " << string(*$2) << std::endl;
-          (yyval.op_val) = (yyvsp[0].op_val);
-       }
-#line 1374 "calc.tab.c"
+#line 132 "calc.y"
+                              {
+     (yyval.op_val) = (yyvsp[0].op_val);
+    }
+#line 1373 "calc.tab.c"
     break;
 
   case 20: /* param: SIN_TIPO IDENTIFICADOR  */
-#line 160 "calc.y"
-                               {  }
-#line 1380 "calc.tab.c"
+#line 135 "calc.y"
+                           { 
+     (yyval.op_val) = (yyvsp[0].op_val);
+  }
+#line 1381 "calc.tab.c"
     break;
 
   case 21: /* param: TIPO_ENTERO IDENTIFICADOR CORCH_INICIO CORCH_FINAL  */
-#line 161 "calc.y"
-                                                           {  }
-#line 1386 "calc.tab.c"
+#line 138 "calc.y"
+                                                       { 
+     (yyval.op_val) = (yyvsp[-2].op_val);
+  }
+#line 1389 "calc.tab.c"
     break;
 
   case 22: /* param: SIN_TIPO IDENTIFICADOR CORCH_INICIO CORCH_FINAL  */
-#line 162 "calc.y"
-                                                        {  }
-#line 1392 "calc.tab.c"
+#line 141 "calc.y"
+                                                    { 
+     
+  }
+#line 1397 "calc.tab.c"
     break;
 
   case 23: /* sent_compuesta: LLAVES_INICIO declaracion_local lista_sentencias LLAVES_FINAL  */
-#line 167 "calc.y"
-                                                                  {std::cout << "sentencia compuesta" << std::endl;}
-#line 1398 "calc.tab.c"
+#line 148 "calc.y"
+                                                                  {}
+#line 1403 "calc.tab.c"
     break;
 
   case 24: /* declaracion_local: declaracion_local var_declaracion  */
-#line 172 "calc.y"
-                                      {std::cout << "declaracion local" << std::endl;}
-#line 1404 "calc.tab.c"
+#line 153 "calc.y"
+                                      {}
+#line 1409 "calc.tab.c"
     break;
 
   case 26: /* lista_sentencias: lista_sentencias sentencia  */
-#line 178 "calc.y"
-                               {std::cout << "LISTA SENTENCIAS" << std::endl;}
-#line 1410 "calc.tab.c"
+#line 159 "calc.y"
+                               {}
+#line 1415 "calc.tab.c"
     break;
 
   case 28: /* sentencia: sentencia_expresion  */
-#line 184 "calc.y"
+#line 165 "calc.y"
                         {}
-#line 1416 "calc.tab.c"
+#line 1421 "calc.tab.c"
     break;
 
   case 29: /* sentencia: sentencia_seleccion  */
-#line 185 "calc.y"
+#line 166 "calc.y"
                         {}
-#line 1422 "calc.tab.c"
+#line 1427 "calc.tab.c"
     break;
 
   case 30: /* sentencia: sentencia_iteracion  */
-#line 186 "calc.y"
+#line 167 "calc.y"
                         {}
-#line 1428 "calc.tab.c"
+#line 1433 "calc.tab.c"
     break;
 
   case 31: /* sentencia: sentencia_retorno  */
-#line 187 "calc.y"
+#line 168 "calc.y"
                       {}
-#line 1434 "calc.tab.c"
+#line 1439 "calc.tab.c"
     break;
 
   case 32: /* sentencia_expresion: expresion PUNTO_COMA  */
-#line 192 "calc.y"
+#line 173 "calc.y"
                          {}
-#line 1440 "calc.tab.c"
+#line 1445 "calc.tab.c"
     break;
 
   case 33: /* sentencia_expresion: PUNTO_COMA  */
-#line 193 "calc.y"
+#line 174 "calc.y"
                {}
-#line 1446 "calc.tab.c"
+#line 1451 "calc.tab.c"
     break;
 
   case 34: /* sentencia_seleccion: SI PAR_INICIO expresion PAR_FINAL LLAVES_INICIO lista_sentencias LLAVES_FINAL SINO LLAVES_INICIO sentencia LLAVES_FINAL  */
-#line 198 "calc.y"
+#line 179 "calc.y"
                                                                                                                             {}
-#line 1452 "calc.tab.c"
+#line 1457 "calc.tab.c"
     break;
 
   case 35: /* sentencia_seleccion: SI PAR_INICIO expresion PAR_FINAL LLAVES_INICIO lista_sentencias LLAVES_FINAL  */
-#line 199 "calc.y"
+#line 180 "calc.y"
                                                                                   {}
-#line 1458 "calc.tab.c"
+#line 1463 "calc.tab.c"
     break;
 
   case 36: /* sentencia_iteracion: MIENTRAS PAR_INICIO expresion PAR_FINAL LLAVES_INICIO lista_sentencias LLAVES_FINAL  */
-#line 204 "calc.y"
+#line 185 "calc.y"
                                                                                         {}
-#line 1464 "calc.tab.c"
+#line 1469 "calc.tab.c"
     break;
 
   case 37: /* sentencia_retorno: RETORNO PUNTO_COMA  */
-#line 209 "calc.y"
+#line 190 "calc.y"
                        {}
-#line 1470 "calc.tab.c"
+#line 1475 "calc.tab.c"
     break;
 
   case 38: /* sentencia_retorno: RETORNO expresion PUNTO_COMA  */
-#line 210 "calc.y"
-                                 {std::cout << "RETORNO PUNTO_COMA" << std::endl; }
-#line 1476 "calc.tab.c"
+#line 191 "calc.y"
+                                 {  }
+#line 1481 "calc.tab.c"
     break;
 
   case 39: /* expresion: var ASIGNAR expresion  */
-#line 216 "calc.y"
+#line 197 "calc.y"
     {
-      
+      if (!existe_variable(string(*(yyvsp[-2].op_val)))) {
+        char* a = "La variable \"";
+        char* b = "\" no ha sido declarada";
+        char buffer[100];
+        strcat(strcpy(buffer, a), string(*(yyvsp[-2].op_val)).c_str());
+        strcat(buffer, b);
+        yyerror(buffer);
+      }
     }
-#line 1484 "calc.tab.c"
-    break;
-
-  case 40: /* expresion: expresion_simple  */
-#line 219 "calc.y"
-                     {}
-#line 1490 "calc.tab.c"
-    break;
-
-  case 41: /* var: IDENTIFICADOR  */
-#line 224 "calc.y"
-                  {}
 #line 1496 "calc.tab.c"
     break;
 
-  case 42: /* var: IDENTIFICADOR CORCH_INICIO expresion CORCH_FINAL  */
-#line 225 "calc.y"
-                                                     {}
+  case 40: /* expresion: expresion_simple  */
+#line 207 "calc.y"
+                     {}
 #line 1502 "calc.tab.c"
     break;
 
-  case 43: /* expresion_simple: expresion_aditiva relop expresion_aditiva  */
-#line 230 "calc.y"
-                                              {}
+  case 41: /* var: IDENTIFICADOR  */
+#line 212 "calc.y"
+                  { (yyval.op_val) = (yyvsp[0].op_val); }
 #line 1508 "calc.tab.c"
     break;
 
-  case 44: /* expresion_simple: expresion_aditiva  */
-#line 231 "calc.y"
-                      {}
+  case 42: /* var: IDENTIFICADOR CORCH_INICIO expresion CORCH_FINAL  */
+#line 213 "calc.y"
+                                                     {}
 #line 1514 "calc.tab.c"
     break;
 
-  case 45: /* relop: OP_COMP_MENOR  */
-#line 236 "calc.y"
-                   {}
+  case 43: /* expresion_simple: expresion_aditiva relop expresion_aditiva  */
+#line 218 "calc.y"
+                                              {}
 #line 1520 "calc.tab.c"
     break;
 
-  case 46: /* relop: OP_COMP_MENOR_IGUAL  */
-#line 237 "calc.y"
-                        {}
+  case 44: /* expresion_simple: expresion_aditiva  */
+#line 219 "calc.y"
+                      {}
 #line 1526 "calc.tab.c"
     break;
 
-  case 47: /* relop: OP_COMP_MAYOR  */
-#line 238 "calc.y"
+  case 45: /* relop: OP_COMP_MENOR  */
+#line 224 "calc.y"
                    {}
 #line 1532 "calc.tab.c"
     break;
 
-  case 48: /* relop: OP_COMP_MAYOR_IGUAL  */
-#line 239 "calc.y"
+  case 46: /* relop: OP_COMP_MENOR_IGUAL  */
+#line 225 "calc.y"
                         {}
 #line 1538 "calc.tab.c"
     break;
 
-  case 49: /* relop: OP_COMP_IGUAL  */
-#line 240 "calc.y"
-                  {}
+  case 47: /* relop: OP_COMP_MAYOR  */
+#line 226 "calc.y"
+                   {}
 #line 1544 "calc.tab.c"
     break;
 
-  case 50: /* relop: OP_COMP_DIFERENTE  */
-#line 241 "calc.y"
-                      {}
+  case 48: /* relop: OP_COMP_MAYOR_IGUAL  */
+#line 227 "calc.y"
+                        {}
 #line 1550 "calc.tab.c"
     break;
 
-  case 51: /* expresion_aditiva: expresion_aditiva OP_SUMA term  */
-#line 246 "calc.y"
-                                   {}
+  case 49: /* relop: OP_COMP_IGUAL  */
+#line 228 "calc.y"
+                  {}
 #line 1556 "calc.tab.c"
     break;
 
-  case 52: /* expresion_aditiva: expresion_aditiva OP_RESTA term  */
-#line 247 "calc.y"
-                                    {}
+  case 50: /* relop: OP_COMP_DIFERENTE  */
+#line 229 "calc.y"
+                      {}
 #line 1562 "calc.tab.c"
     break;
 
-  case 53: /* expresion_aditiva: term  */
-#line 248 "calc.y"
-         {}
+  case 51: /* expresion_aditiva: expresion_aditiva OP_SUMA term  */
+#line 234 "calc.y"
+                                   {}
 #line 1568 "calc.tab.c"
     break;
 
-  case 54: /* term: term OP_MUL factor  */
-#line 258 "calc.y"
-                       {}
+  case 52: /* expresion_aditiva: expresion_aditiva OP_RESTA term  */
+#line 235 "calc.y"
+                                    {}
 #line 1574 "calc.tab.c"
     break;
 
-  case 55: /* term: term OP_DIV factor  */
-#line 259 "calc.y"
-                       {}
+  case 53: /* expresion_aditiva: term  */
+#line 236 "calc.y"
+         {}
 #line 1580 "calc.tab.c"
     break;
 
-  case 56: /* term: factor  */
-#line 260 "calc.y"
-           {}
+  case 54: /* term: term OP_MUL factor  */
+#line 241 "calc.y"
+                       {}
 #line 1586 "calc.tab.c"
     break;
 
+  case 55: /* term: term OP_DIV factor  */
+#line 242 "calc.y"
+                       {}
+#line 1592 "calc.tab.c"
+    break;
+
+  case 56: /* term: factor  */
+#line 243 "calc.y"
+           {}
+#line 1598 "calc.tab.c"
+    break;
+
   case 57: /* factor: PAR_INICIO expresion PAR_FINAL  */
-#line 270 "calc.y"
+#line 248 "calc.y"
                                    {
       
     }
-#line 1594 "calc.tab.c"
-    break;
-
-  case 58: /* factor: var  */
-#line 273 "calc.y"
-        {}
-#line 1600 "calc.tab.c"
-    break;
-
-  case 59: /* factor: call  */
-#line 274 "calc.y"
-         {}
 #line 1606 "calc.tab.c"
     break;
 
+  case 58: /* factor: var  */
+#line 251 "calc.y"
+        {}
+#line 1612 "calc.tab.c"
+    break;
+
+  case 59: /* factor: call  */
+#line 252 "calc.y"
+         {}
+#line 1618 "calc.tab.c"
+    break;
+
   case 60: /* factor: NUMERO  */
-#line 275 "calc.y"
+#line 253 "calc.y"
            {
     
     }
-#line 1614 "calc.tab.c"
+#line 1626 "calc.tab.c"
     break;
 
   case 61: /* call: IDENTIFICADOR PAR_INICIO args PAR_FINAL  */
-#line 283 "calc.y"
+#line 261 "calc.y"
     {
       
     }
-#line 1622 "calc.tab.c"
-    break;
-
-  case 62: /* args: lista_arg  */
-#line 290 "calc.y"
-              {}
-#line 1628 "calc.tab.c"
-    break;
-
-  case 64: /* lista_arg: lista_arg COMA expresion  */
-#line 296 "calc.y"
-                             {}
 #line 1634 "calc.tab.c"
     break;
 
-  case 65: /* lista_arg: expresion  */
-#line 297 "calc.y"
+  case 62: /* args: lista_arg  */
+#line 268 "calc.y"
               {}
 #line 1640 "calc.tab.c"
     break;
 
+  case 64: /* lista_arg: lista_arg COMA expresion  */
+#line 274 "calc.y"
+                             {}
+#line 1646 "calc.tab.c"
+    break;
 
-#line 1644 "calc.tab.c"
+  case 65: /* lista_arg: expresion  */
+#line 275 "calc.y"
+              {}
+#line 1652 "calc.tab.c"
+    break;
+
+
+#line 1656 "calc.tab.c"
 
       default: break;
     }
@@ -1833,7 +1845,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 300 "calc.y"
+#line 278 "calc.y"
 
 
 int yyerror(string s)
@@ -1841,9 +1853,8 @@ int yyerror(string s)
   extern int yylineno;	// defined and maintained in lex.c
   extern char *yytext;	// defined and maintained in lex.c
   
-  cerr << "ERROR: " << s;
-  cerr << " en la linea " << yylineno << endl;
-  exit(1);
+  cerr << "[ERROR LINEA " << yylineno << "]: "<< s << endl;
+  //exit(1);
 }
 
 int yyerror(char *s)

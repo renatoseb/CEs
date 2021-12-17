@@ -1,0 +1,7 @@
+
+entero a;
+
+entero main()
+{
+    entero a; 
+}

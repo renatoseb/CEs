@@ -12,14 +12,18 @@ struct util
     int tam;
     int line;
 
-    util()
+    util() {}
+
+    util(int line)
     {
-        tam = 0;
+        this->tam = 0;
+        this->line = line;
     }
 
-    util(int tam)
+    util(int tam, int line)
     {
         this->tam = tam;
+        this->line = line;
         values.reserve(this->tam);
     }
 };
@@ -65,25 +69,27 @@ bool existe_funcion(string name)
     return functions.count(name);
 }
 
-bool anhadir_id_var(string name)
+bool anhadir_id_var(string name, int line, int& error_line)
 {
     if (existe_variable(name))
     {
+        error_line = variables[name].line;
         return false; // la variable ya existe
     }
     // se crea una variable
-    variables[name] = util();
+    variables[name] = util(line);
     return true;
 }
 
-bool anhadir_id_arreglo(string name, int tam)
+bool anhadir_id_arreglo(string name, int tam, int line, int& error_line)
 {
     if (existe_variable(name))
     {
         return false; // la variable ya existe
+        error_line = variables[name].line;
     }
     // se crea una variable
-    variables[name] = util(tam);
+    variables[name] = util(tam, line);
     return true;
 }
 
@@ -113,9 +119,6 @@ bool modificar_arreglo_en_i(string name, string val, int i)
 
 bool anhadir_id_function(string name, string parameters)
 {
-    std::cout << "name: " << name << "\n";
-    std::cout << "parameters: " << parameters << "\n";
-
     if (existe_funcion(name))
         return false;   // la funcion ya existe
 
@@ -126,6 +129,5 @@ bool anhadir_id_function(string name, string parameters)
         par.push_back(temp);
 
     functions[name] = par;
-    imprimir_map_funcs(functions);
     return true;
 }

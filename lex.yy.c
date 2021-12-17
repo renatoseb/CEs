@@ -493,15 +493,13 @@ int yy_flex_debug = 0;
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
 #line 1 "calc.l"
-/* Mini Calculator */
-/* calc.lex */
-#line 5 "calc.l"
+#line 2 "calc.l"
 #include "heading.h"
 #include "calc.tab.h" // #include "tok.h"
 extern "C" int yylex();
 int yyerror(char *s);
-#line 504 "lex.yy.c"
-#line 505 "lex.yy.c"
+#line 502 "lex.yy.c"
+#line 503 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -718,9 +716,9 @@ YY_DECL
 		}
 
 	{
-#line 41 "calc.l"
+#line 11 "calc.l"
 
-#line 724 "lex.yy.c"
+#line 722 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -779,182 +777,182 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 42 "calc.l"
-{ /*std::cout << "ESPACIO" << std::endl;*/ }
+#line 12 "calc.l"
+{  }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 43 "calc.l"
-{ yylval.op_val = new std::string(yytext); std::cout << "AQUI ESTA 01" << std::endl; return NUMERO;}
+#line 13 "calc.l"
+{ yylval.op_val = new std::string(yytext); return NUMERO;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 44 "calc.l"
-{ /*std::cout << "AQUI ESTAAAA 1" << std::endl;*/ return TIPO_ENTERO; }
+#line 14 "calc.l"
+{ return TIPO_ENTERO; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 45 "calc.l"
-{ /*std::cout << "AQUI ESTAAAA 2" << std::endl;*/ return SIN_TIPO; }
+#line 15 "calc.l"
+{ return SIN_TIPO; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 46 "calc.l"
-{ /*std::cout << "AQUI ESTAAAA 3" << std::endl;*/ return RETORNO; }
+#line 16 "calc.l"
+{ return RETORNO; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 47 "calc.l"
-{ /*std::cout << "AQUI ESTAAAA 4" << std::endl;*/ return MIENTRAS; }
+#line 17 "calc.l"
+{ return MIENTRAS; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 48 "calc.l"
-{ /*std::cout << "AQUI ESTAAAA 5" << std::endl;*/ return SI; }
+#line 18 "calc.l"
+{ return SI; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 49 "calc.l"
-{ /*std::cout << "AQUI ESTAAAA 6" << std::endl;*/ return SINO; }
+#line 19 "calc.l"
+{ return SINO; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 50 "calc.l"
-{ /*std::cout << "AQUI ESTAAAA 7" << std::endl;*/ return MAIN; }
+#line 20 "calc.l"
+{ return MAIN; }
 	YY_BREAK
 case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
-#line 52 "calc.l"
+#line 22 "calc.l"
 ;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 53 "calc.l"
-{ yylval.op_val = new std::string(yytext); /*std::cout << "AQUI ESTA 1" << std::endl;*/ return LLAVES_INICIO; }
+#line 23 "calc.l"
+{ yylval.op_val = new std::string(yytext); return LLAVES_INICIO; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 54 "calc.l"
-{ yylval.op_val = new std::string(yytext); /*std::cout << "AQUI ESTA 2" << std::endl;*/ return LLAVES_FINAL; }
+#line 24 "calc.l"
+{ yylval.op_val = new std::string(yytext); return LLAVES_FINAL; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 55 "calc.l"
-{ yylval.op_val = new std::string(yytext); /*std::cout << "AQUI ESTA 3" << std::endl;*/ return PAR_INICIO; }
+#line 25 "calc.l"
+{ yylval.op_val = new std::string(yytext); return PAR_INICIO; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 56 "calc.l"
-{ yylval.op_val = new std::string(yytext); /*std::cout << "AQUI ESTA 4" << std::endl;*/ return PAR_FINAL; }
+#line 26 "calc.l"
+{ yylval.op_val = new std::string(yytext); return PAR_FINAL; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 57 "calc.l"
-{ yylval.op_val = new std::string(yytext); /*std::cout << "AQUI ESTA 5" << std::endl;*/ return CORCH_INICIO; }
+#line 27 "calc.l"
+{ yylval.op_val = new std::string(yytext); return CORCH_INICIO; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 58 "calc.l"
-{ yylval.op_val = new std::string(yytext); /*std::cout << "AQUI ESTA 6" << std::endl;*/ return CORCH_FINAL; }
+#line 28 "calc.l"
+{ yylval.op_val = new std::string(yytext); return CORCH_FINAL; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 59 "calc.l"
-{ yylval.op_val = new std::string(yytext); /*std::cout << "AQUI ESTA 11" << std::endl;*/ return OP_COMP_MAYOR_IGUAL; }
+#line 29 "calc.l"
+{ yylval.op_val = new std::string(yytext); return OP_COMP_MAYOR_IGUAL; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 60 "calc.l"
-{ yylval.op_val = new std::string(yytext); /*std::cout << "AQUI ESTA 12" << std::endl;*/ return OP_COMP_MENOR_IGUAL; }
+#line 30 "calc.l"
+{ yylval.op_val = new std::string(yytext); return OP_COMP_MENOR_IGUAL; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 61 "calc.l"
-{ yylval.op_val = new std::string(yytext); /*std::cout << "AQUI ESTA 7" << std::endl;*/ return OP_COMP_MAYOR; }
+#line 31 "calc.l"
+{ yylval.op_val = new std::string(yytext); return OP_COMP_MAYOR; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 62 "calc.l"
-{ yylval.op_val = new std::string(yytext); /*std::cout << "AQUI ESTA 8" << std::endl;*/ return OP_COMP_MENOR; }
+#line 32 "calc.l"
+{ yylval.op_val = new std::string(yytext); return OP_COMP_MENOR; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 63 "calc.l"
-{ yylval.op_val = new std::string(yytext); /*std::cout << "AQUI ESTA 9" << std::endl;*/ return OP_COMP_IGUAL; }
+#line 33 "calc.l"
+{ yylval.op_val = new std::string(yytext); return OP_COMP_IGUAL; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 64 "calc.l"
-{ yylval.op_val = new std::string(yytext); /*std::cout << "AQUI ESTA 17" << std::endl;*/ return ASIGNAR; }
+#line 34 "calc.l"
+{ yylval.op_val = new std::string(yytext); return ASIGNAR; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 65 "calc.l"
-{ yylval.op_val = new std::string(yytext); /*std::cout << "AQUI ESTA 10" << std::endl;*/ return OP_COMP_DIFERENTE; }
+#line 35 "calc.l"
+{ yylval.op_val = new std::string(yytext); return OP_COMP_DIFERENTE; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 66 "calc.l"
-{ yylval.op_val = new std::string(yytext); /*std::cout << "AQUI ESTA 13" << std::endl;*/ return OP_SUMA; }
+#line 36 "calc.l"
+{ yylval.op_val = new std::string(yytext); return OP_SUMA; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 67 "calc.l"
-{ yylval.op_val = new std::string(yytext); /*std::cout << "AQUI ESTA 14" << std::endl;*/ return OP_RESTA; }
+#line 37 "calc.l"
+{ yylval.op_val = new std::string(yytext); return OP_RESTA; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 68 "calc.l"
-{ yylval.op_val = new std::string(yytext); /*std::cout << "AQUI ESTA 15" << std::endl;*/ return OP_MUL; }
+#line 38 "calc.l"
+{ yylval.op_val = new std::string(yytext); return OP_MUL; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 69 "calc.l"
-{ yylval.op_val = new std::string(yytext); /*std::cout << "AQUI ESTA 16" << std::endl;*/ return OP_DIV; }
+#line 39 "calc.l"
+{ yylval.op_val = new std::string(yytext); return OP_DIV; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 70 "calc.l"
-{ yylval.op_val = new std::string(yytext); /*std::cout << "AQUI ESTA 18" << std::endl;*/ return COMA; }
+#line 40 "calc.l"
+{ yylval.op_val = new std::string(yytext); return COMA; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 71 "calc.l"
-{ yylval.op_val = new std::string(yytext); /*std::cout << "AQUI ESTA 0" << std::endl;*/ return IDENTIFICADOR; }
+#line 41 "calc.l"
+{ yylval.op_val = new std::string(yytext); return IDENTIFICADOR; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 72 "calc.l"
-{ yylval.op_val = new std::string(yytext); /*std::cout << "AQUI ESTA PC" << std::endl;*/ return PUNTO_COMA; }
+#line 42 "calc.l"
+{ yylval.op_val = new std::string(yytext); return PUNTO_COMA; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 74 "calc.l"
-{ /* std::cout << "AQUI ESTA 19" << std::endl;*/ return ERROR; }
+#line 44 "calc.l"
+{ return ERROR; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 75 "calc.l"
-{ /* std::cout << "AQUI ESTA 20" << std::endl;*/ return ERROR; }
+#line 45 "calc.l"
+{ return ERROR; }
 	YY_BREAK
 case 33:
 /* rule 33 can match eol */
 YY_RULE_SETUP
-#line 76 "calc.l"
+#line 46 "calc.l"
 { yylineno++; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 77 "calc.l"
-{ std::cerr << "SCANNER "; yyerror(""); /*exit(1);*/	}
+#line 47 "calc.l"
+{ std::cerr << "SCANNER "; yyerror(""); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 79 "calc.l"
+#line 49 "calc.l"
 ECHO;
 	YY_BREAK
-#line 958 "lex.yy.c"
+#line 956 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1959,5 +1957,5 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 79 "calc.l"
+#line 49 "calc.l"
 
